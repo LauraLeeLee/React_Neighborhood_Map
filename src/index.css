@@ -5,3 +5,7 @@ body {
   background-color: #a6a6a6;
   text-align: center;
 }
+
+.map {
+  height: 100%;
+}

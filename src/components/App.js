@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Map from '../components/Map';
+import MapView from '../components/MapView';
 
 
 class App extends Component {
@@ -7,10 +7,11 @@ class App extends Component {
     return (
       <div className="container">
         <h1>Neighborhood Map</h1>
+
+        <section>
+          <MapView />
+        </section>
       </div>
-      <section>
-        <Map />
-      </section>
     );
   }
 }
