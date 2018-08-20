@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { mapStyle } from '../data/mapStyle.js';
 
 class MapView extends Component {
-  const map = new google.maps.Map(document.getElementsById('map'), {
+  const map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 41.5916799,
       lng: 13.2427548
