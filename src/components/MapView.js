@@ -8,7 +8,7 @@ class MapView extends Component {
       lng: 13.2427548
     },
     zoom: 13,
-    styles: styles,
+    styles: mapStyle,
     gestureHandling: 'greedy',
     mapTypeControl: false
   });
