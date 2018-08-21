@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { mapStyle } from '../data/mapStyle.js';
 import scriptLoader from 'react-async-script-loader';
 
+const google = window.google;
+
 class MapView extends Component {
 
   constructor(props){
     super(props);
-    this.map = null;
+    
   }
 
   componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed }) {
     if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
       if (isScriptLoadSucceed) {
-        this.map = new google.maps.Map(document.getElementById('map'), {
+        const map = new google.maps.Map(document.getElementById('map'), {
           center: {
             lat: 41.5916799,
             lng: 13.2427548
@@ -26,7 +28,6 @@ class MapView extends Component {
       }
       else this.props.onError()
     }
-
 
   render() {
     return (
