@@ -10,7 +10,7 @@ class App extends Component {
     super(props);
 
   }
-  
+
   componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed }) {
     if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
       if (isScriptLoadSucceed) {
@@ -24,6 +24,7 @@ class App extends Component {
             gestureHandling: 'greedy',
             mapTypeControl: false
           });
+        console.log(map);
         }
       }
       else this.props.onError()
@@ -34,9 +35,7 @@ class App extends Component {
       <div className="container">
         <h1>Neighborhood Map</h1>
 
-        <section>
-          <div id="map">
-          </div>
+        <section id="map">
         </section>
       </div>
     );
