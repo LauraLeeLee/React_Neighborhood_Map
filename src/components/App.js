@@ -43,5 +43,5 @@ class App extends Component {
 }
 
 export default scriptLoader(
-  [`https://maps.googleapis.com/maps/api/js?key=AIzaSyCpvcttgCR8VMnxAD_vyISgecNi9Q7v1pI`]
+  [`https://maps.googleapis.com/maps/api/js?key=AIzaSyDmJfjc7Uv-zPuOjtHx6GTiAFYz5JojX-A`]
 ) (App);
