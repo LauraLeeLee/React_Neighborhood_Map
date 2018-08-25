@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { mapStyle } from '../data/mapStyle.js';
 import scriptLoader from 'react-async-script-loader';
-
-const google = window.google;
+import PlacesList from './PlacesList.js';
 
 class App extends Component {
-
-  constructor(props){
-    super(props);
-
+  state = {
+    listOn: true,
+    infowindow: {},
   }
 
   componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed }) {
@@ -24,11 +22,29 @@ class App extends Component {
             gestureHandling: 'greedy',
             mapTypeControl: false
           });
+
+          let marker = new window.google.maps.Marker({
+      			map: map,
+      			position: map.center,
+      			// title: title,
+      			animation: window.google.maps.Animation.DROP,
+      			// icon: defaultIcon,
+      			// id: id,
+      			open: false
+      		});
+
         console.log(map);
         }
       }
       else this.props.onError()
     }
+
+  // initMap = () => {
+  //     const map = new window.google.maps.Map(document.getElementById('map'), {
+  //         center: {lat: -34.397, lng: 150.644},
+  //         zoom: 8
+  //       });
+  //     }
 
   render() {
     return (
