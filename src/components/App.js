@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { mapStyle } from '../data/mapStyle.js';
+import  locations  from '../data/locations.js';
 import scriptLoader from 'react-async-script-loader';
 import PlacesList from './PlacesList.js';
 
@@ -8,6 +9,7 @@ class App extends Component {
     listOn: true,
     infowindow: {},
   }
+
 
   componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed }) {
     if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
@@ -23,17 +25,20 @@ class App extends Component {
             mapTypeControl: false
           });
 
-          let marker = new window.google.maps.Marker({
-      			map: map,
-      			position: map.center,
-      			// title: title,
-      			animation: window.google.maps.Animation.DROP,
-      			// icon: defaultIcon,
-      			// id: id,
-      			open: false
-      		});
+          locations.map(location => {
+            let marker = new window.google.maps.Marker({
+        			map: map,
+        			position: location.location,
+        			title: location.title,
+        			animation: window.google.maps.Animation.DROP,
+        			// icon: defaultIcon,
+        			// id: id,
+        			open: false
+        		});
+          });
 
         console.log(map);
+        console.log(this.state.places);
         }
       }
       else this.props.onError()
