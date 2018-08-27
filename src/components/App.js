@@ -8,6 +8,7 @@ class App extends Component {
   state = {
     listOn: true,
     infowindow: {},
+    // locations: [locations],
   }
 
 
@@ -25,20 +26,20 @@ class App extends Component {
             mapTypeControl: false
           });
 
-          locations.map(location => {
-            let marker = new window.google.maps.Marker({
-        			map: map,
-        			position: location.location,
-        			title: location.title,
-        			animation: window.google.maps.Animation.DROP,
-        			// icon: defaultIcon,
-        			// id: id,
-        			open: false
-        		});
-          });
+          // locations.map(location => {
+          //   let marker = new window.google.maps.Marker({
+        	// 		map: map,
+        	// 		position: location.location,
+        	// 		title: location.title,
+        	// 		animation: window.google.maps.Animation.DROP,
+        	// 		// icon: defaultIcon,
+        	// 		id: location.id,
+        	// 		open: false
+        	// 	});
+          // });
 
         console.log(map);
-        console.log(this.state.places);
+        console.log(locations);
         }
       }
       else this.props.onError()
