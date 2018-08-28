@@ -93,3 +93,5 @@ const locations = [
   category: ["shopping"]
   },
 ];
+
+export default locations;

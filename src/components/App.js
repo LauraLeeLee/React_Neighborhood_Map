@@ -8,7 +8,7 @@ class App extends Component {
   state = {
     listOn: true,
     infowindow: {},
-    // locations: [locations],
+    locations: locations,
   }
 
 
@@ -26,17 +26,17 @@ class App extends Component {
             mapTypeControl: false
           });
 
-          // locations.map(location => {
-          //   let marker = new window.google.maps.Marker({
-        	// 		map: map,
-        	// 		position: location.location,
-        	// 		title: location.title,
-        	// 		animation: window.google.maps.Animation.DROP,
-        	// 		// icon: defaultIcon,
-        	// 		id: location.id,
-        	// 		open: false
-        	// 	});
-          // });
+          this.state.locations.map(location => {
+            let marker = new window.google.maps.Marker({
+        			map: map,
+        			position: location.location,
+        			title: location.title,
+        			animation: window.google.maps.Animation.DROP,
+        			// icon: defaultIcon,
+        			id: location.id,
+        			open: false
+        		});
+          });
 
         console.log(map);
         console.log(locations);
@@ -56,6 +56,9 @@ class App extends Component {
     return (
       <div className="container">
         <h1>Neighborhood Map</h1>
+        <section className="listSection">
+          <PlacesList locations = {this.state.locations}/>
+        </section>
 
         <section id="map">
         </section>
