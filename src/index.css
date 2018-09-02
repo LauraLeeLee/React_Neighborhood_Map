@@ -1,9 +1,14 @@
+:root {
+  --main-color: #ffffcc;;
+  --main-font: #0000cc;
+}
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: #a6a6a6;
+  background: var(--main-color);
   text-align: center;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .container {
@@ -15,6 +20,9 @@ body {
 h1 {
   grid-row-start: 1;
   grid-column: 1 / span 2;
+  font-weight: 700;
+  color: var(--main-font);
+
 }
 
 #map {
@@ -32,4 +40,5 @@ h1 {
 
 .placesList {
   list-style-type: none;
+  color: var(--main-font);
 }

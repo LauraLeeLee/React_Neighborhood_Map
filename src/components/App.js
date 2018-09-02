@@ -6,9 +6,14 @@ import PlacesList from './PlacesList.js';
 
 class App extends Component {
   state = {
-    listOn: true,
+    placeslistOpen: true,
     infowindow: {},
+    infowindowOpen: false,
     locations: locations,
+  }
+
+  togglePlacesList = () => {
+    const { placeslistOpen, } = this.state;
   }
 
 
@@ -53,11 +58,13 @@ class App extends Component {
   //     }
 
   render() {
+    const { locations, placeslistOpen } = this.state;
+
     return (
       <div className="container">
         <h1>Neighborhood Map</h1>
         <section className="listSection">
-          <PlacesList locations = {this.state.locations}/>
+          <PlacesList locations = {locations}/>
         </section>
 
         <section id="map">

@@ -17,7 +17,7 @@ class PlacesList extends Component {
               {location.title}
             </li>
           )
-          )}
+        )}
         </ul>
       </div>
     );
