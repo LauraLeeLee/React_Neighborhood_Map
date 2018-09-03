@@ -6,14 +6,16 @@ import PlacesList from './PlacesList.js';
 
 class App extends Component {
   state = {
-    placeslistOpen: true,
+    listOpen: true,
     infowindow: {},
     infowindowOpen: false,
-    locations: locations,
+    locations: locations, //data from locations.js file
   }
 
-  togglePlacesList = () => {
-    const { placeslistOpen, } = this.state;
+  toggleList = () => {
+    const { listOpen } = this.state;
+    this.setState({listOpen: !listOpen});
+    console.log(listOpen);
   }
 
 
@@ -58,13 +60,19 @@ class App extends Component {
   //     }
 
   render() {
-    const { locations, placeslistOpen } = this.state;
+    const { locations, listOpen } = this.state;
 
     return (
       <div className="container">
         <h1>Neighborhood Map</h1>
-        <section className="listSection">
-          <PlacesList locations = {locations}/>
+        <div className="toggle-list"
+              onClick={this.toggleList} >
+            <h3>Toggle List</h3>
+        </div>
+        <section id="listSection"
+                 className={ listOpen ? "list-show" : "list-hide"} >
+          <PlacesList locations = {locations}
+                      listOpen = {listOpen}/>
         </section>
 
         <section id="map">

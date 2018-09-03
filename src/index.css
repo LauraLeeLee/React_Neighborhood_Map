@@ -32,7 +32,7 @@ h1 {
 
 }
 
-.listSection {
+#listSection {
   height: 100vh;
   grid-row-start: 2;
   grid-column-start: 1;
@@ -41,4 +41,24 @@ h1 {
 .placesList {
   list-style-type: none;
   color: var(--main-font);
+  margin-top: 45px;
+  text-align: left;
+}
+
+.placesList li {
+  padding: 3px;
+}
+
+.toggle-list {
+  grid-row-start: 2;
+  grid-column-start: 1;
+  color: var(--main-font);
+}
+
+.list-hide {
+  display: none;
+}
+
+.list-show {
+  display: block;
 }
