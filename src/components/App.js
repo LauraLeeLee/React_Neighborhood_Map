@@ -12,6 +12,7 @@ class App extends Component {
     locations: locations, //data from locations.js file
   }
 
+
   toggleList = () => {
     const { listOpen } = this.state;
     this.setState({listOpen: !listOpen});
@@ -61,7 +62,7 @@ class App extends Component {
 
   render() {
     const { locations, listOpen } = this.state;
-
+    console.log(listOpen);
     return (
       <div className="container">
         <h1>Neighborhood Map</h1>
