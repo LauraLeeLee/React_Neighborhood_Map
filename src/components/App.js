@@ -68,7 +68,7 @@ class App extends Component {
         <h1>Neighborhood Map</h1>
         <div className="toggle-list"
               onClick={this.toggleList} >
-            <h3>Toggle List</h3>
+            <h5>{listOpen ? 'Hide List' : 'Show List'}</h5>
         </div>
         <section id="listSection"
                  className={ listOpen ? "list-show" : "list-hide"} >
