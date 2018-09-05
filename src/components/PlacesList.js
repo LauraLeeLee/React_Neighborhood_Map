@@ -4,11 +4,14 @@ import PropTypes from 'prop-types';
 class PlacesList extends Component {
 
   static propTypes = {
-    locations: PropTypes.array.isRequired
+    locations: PropTypes.array.isRequired,
+    listOpen: PropTypes.bool,
+    infowindowOpen: PropTypes.bool,
+
   }
 
   render() {
-    const { locations } = this.props;
+    const { locations, infowindowOpen, listOpen } = this.props;
     return (
       <div>
         <ul className="placesList">

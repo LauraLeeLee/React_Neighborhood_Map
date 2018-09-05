@@ -3,6 +3,7 @@ import { mapStyle } from '../data/mapStyle.js';
 import  locations  from '../data/locations.js';
 import scriptLoader from 'react-async-script-loader';
 import PlacesList from './PlacesList.js';
+import InfoWindow from './InfoWindow.js';
 
 class App extends Component {
   state = {
@@ -61,8 +62,9 @@ class App extends Component {
   //     }
 
   render() {
-    const { locations, listOpen } = this.state;
+    const { locations, listOpen, infowindowOpen } = this.state;
     console.log(listOpen);
+    console.log(infowindowOpen);
     return (
       <div className="container">
         <h1>Neighborhood Map</h1>
@@ -77,6 +79,7 @@ class App extends Component {
         </section>
 
         <section id="map">
+          <InfoWindow />
         </section>
       </div>
     );
