@@ -6,13 +6,17 @@ import PlacesList from './PlacesList.js';
 import InfoWindow from './InfoWindow.js';
 
 class App extends Component {
-  state = {
-    listOpen: true,
-    infowindow: {},
-    infowindowOpen: false,
-    locations: locations, //data from locations.js file
+  constructor(props) {
+    super(props);
+    this.state = {
+      listOpen: true,
+      infowindow: {},
+      infowindowOpen: false,
+      map: {},
+      locations: locations, //data from locations.js file
+    }
+    this.toggleList = this.toggleList.bind(this);
   }
-
 
   toggleList = () => {
     const { listOpen } = this.state;
@@ -21,7 +25,8 @@ class App extends Component {
   }
 
 
-  componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed }) {
+  componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
+    // const { isScriptLoaded, isScriptLoadSucceed } = this.props;
     if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
       if (isScriptLoadSucceed) {
         const map = new window.google.maps.Map(document.getElementById('map'), {
@@ -35,6 +40,10 @@ class App extends Component {
             mapTypeControl: false
           });
 
+          //create infowindows
+          const infowindow = new window.google.maps.InfoWindow({maxWidth: 200});
+
+          //create markers
           this.state.locations.map(location => {
             let marker = new window.google.maps.Marker({
         			map: map,
@@ -47,11 +56,16 @@ class App extends Component {
         		});
           });
 
+          this.setState({
+            map: map,
+            infowindow: infowindow,
+          });
+
         console.log(map);
         console.log(locations);
         }
       }
-      else this.props.onError()
+      // else this.props.onError()
     }
 
   // initMap = () => {
@@ -62,24 +76,30 @@ class App extends Component {
   //     }
 
   render() {
-    const { locations, listOpen, infowindowOpen } = this.state;
+    const { locations, listOpen, infowindowOpen, infowindow, toggleList, map } = this.state;
     console.log(listOpen);
     console.log(infowindowOpen);
+    console.log(map);
+    console.log(this.toggleList);
     return (
       <div className="container">
         <h1>Neighborhood Map</h1>
-        <div className="toggle-list"
-              onClick={this.toggleList} >
-            <h5>{listOpen ? 'Hide List' : 'Show List'}</h5>
-        </div>
+
         <section id="listSection"
                  className={ listOpen ? "list-show" : "list-hide"} >
           <PlacesList locations = {locations}
-                      listOpen = {listOpen}/>
+                      listOpen = {listOpen}
+                      infowindow={infowindow}
+                      infowindowOpen={infowindowOpen}
+                      map={map}
+                      onToggleList={toggleList}/>
         </section>
 
         <section id="map">
-          <InfoWindow />
+          <InfoWindow
+          listOpen = {listOpen}
+          infowindow={infowindow}
+          infowindowOpen={infowindowOpen}/>
         </section>
       </div>
     );
