@@ -1,6 +1,6 @@
 
 // function to populate the infowindow when marker is clicked.
-function populateInfoWindow(marker, infowindow) {
+export const populateInfoWindow = (marker, infowindow) => {
 	//check to see if infowindow is already open
 	if (infowindow.marker != marker) {
 		//clear the infowindow content allowing streetview to load
@@ -25,7 +25,7 @@ function populateInfoWindow(marker, infowindow) {
 }
 
 //gets place details from place_id via PlacesService
-function getPlacesDetails(marker, infowindow) {
+export const getPlacesDetails = (marker, infowindow) => {
 	var service = new window.google.maps.places.PlacesService(map);
 	service.getDetails({
 		placeId: marker.id
@@ -71,4 +71,4 @@ function getPlacesDetails(marker, infowindow) {
 	});
 }
 
-export default placesDetails;
+// export default placesDetails;

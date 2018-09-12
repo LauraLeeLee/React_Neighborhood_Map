@@ -4,7 +4,7 @@ import  locations  from '../data/locations.js';
 import scriptLoader from 'react-async-script-loader';
 import PlacesList from './PlacesList.js';
 import InfoWindow from './InfoWindow.js';
-import placesDetails from '../data/placesDetails.js';
+import {populateInfoWindow, getPlacesDetails} from '../data/placesDetails.js';
 
 class App extends Component {
   constructor(props) {
