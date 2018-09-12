@@ -5,12 +5,13 @@ import PropTypes from 'prop-types';
 
 class InfoWindow extends Component {
   static propTypes = {
+    locations: PropTypes.array.isRequired,
     listOpen: PropTypes.bool.isRequired,
     infowindowOpen: PropTypes.bool.isRequired,
     infowindow: PropTypes.object.isRequired
   }
   render() {
-    const {listOpen, infowindowOpen } = this.props;
+    const {listOpen, infowindowOpen, locations } = this.props;
     console.log({listOpen});
     console.log({infowindowOpen});
 

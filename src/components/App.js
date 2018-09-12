@@ -4,6 +4,7 @@ import  locations  from '../data/locations.js';
 import scriptLoader from 'react-async-script-loader';
 import PlacesList from './PlacesList.js';
 import InfoWindow from './InfoWindow.js';
+import placesDetails from '../data/placesDetails.js';
 
 class App extends Component {
   constructor(props) {
@@ -54,7 +55,28 @@ class App extends Component {
         			id: location.id,
         			open: false
         		});
-          });
+
+            //adds click to markers with bounce
+            marker.addListener('click', function() {
+              const marker = this;
+                marker.setAnimation(window.google.maps.Animation.BOUNCE);
+                setTimeout(function() {
+                  marker.setAnimation(null);
+                }, 2500);
+
+                getPlacesDetails();
+
+              //get locations information
+
+              //create infowindow
+              marker.infowindow = `div class="infowindow">
+                                    <div class="item-info">
+                                      <h3 class="item-name">
+                                    </div>
+                                  </div>`
+
+              });
+            });
 
           this.setState({
             map: map,
@@ -68,15 +90,10 @@ class App extends Component {
       // else this.props.onError()
     }
 
-  // initMap = () => {
-  //     const map = new window.google.maps.Map(document.getElementById('map'), {
-  //         center: {lat: -34.397, lng: 150.644},
-  //         zoom: 8
-  //       });
-  //     }
+
 
   render() {
-    const { locations, listOpen, infowindowOpen, infowindow, toggleList, map } = this.state;
+    const { locations, listOpen, infowindowOpen, infowindow, map } = this.state;
     console.log(listOpen);
     console.log(infowindowOpen);
     console.log(map);
@@ -84,15 +101,18 @@ class App extends Component {
     return (
       <div className="container">
         <h1>Neighborhood Map</h1>
-
+        <h5
+          className="toggle-list"
+          onClick={this.toggleList}>
+            {listOpen ? 'Hide List' : 'Show List'}
+        </h5>
         <section id="listSection"
                  className={ listOpen ? "list-show" : "list-hide"} >
           <PlacesList locations = {locations}
                       listOpen = {listOpen}
                       infowindow={infowindow}
                       infowindowOpen={infowindowOpen}
-                      map={map}
-                      onToggleList={toggleList}/>
+                      map={map} />
         </section>
 
         <section id="map">
