@@ -30,7 +30,7 @@ class App extends Component {
     // const { isScriptLoaded, isScriptLoadSucceed } = this.props;
     if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
       if (isScriptLoadSucceed) {
-        const map = new window.google.maps.Map(document.getElementById('map'), {
+        let map = new window.google.maps.Map(document.getElementById('map'), {
           center: {
             lat: 41.5916799,
             lng: 13.2427548
@@ -64,7 +64,7 @@ class App extends Component {
                   marker.setAnimation(null);
                 }, 2500);
 
-                getPlacesDetails();
+                populateInfoWindow();
 
               //get locations information
 
