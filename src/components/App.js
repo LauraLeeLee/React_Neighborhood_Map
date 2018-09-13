@@ -18,7 +18,8 @@ class App extends Component {
       showFiltered: true,
     }
     this.toggleList = this.toggleList.bind(this);
-    // this.populateInfoWindow = this.populateInfoWindow.bind(this);
+    this.filterByName = this.filterByName.bind(this);
+    this.filterCategories = this.filterCategories.bind(this);
   }
 
   toggleList = () => {
@@ -27,7 +28,7 @@ class App extends Component {
     console.log(listOpen);
   }
 
-  filterList = () => {
+  filterByName = () => {
     var filter = filter().toLowerCase();
 
     locations().forEach(function(location) {
@@ -40,7 +41,22 @@ class App extends Component {
       }
     });
   }
-  
+
+  filterCategories = (filterObj) => {
+    locations().forEach(function(location) {
+    //for loop to check each item in locations property
+      for(var i = 0; i < location.category.length; i++) {
+        if(location.category[i] == filterObj.category) {
+          location.showFiltered(true);
+          location.marker.setVisible(true);
+        } else {
+          location.showFiltered(false);
+          location.marker.setVisible(false);
+        }
+      }
+    });
+  }
+
   componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
     const { marker, infowindow, map } = this.state;
     // const { isScriptLoaded, isScriptLoadSucceed } = this.props;
@@ -109,7 +125,7 @@ class App extends Component {
 
 
   render() {
-    const { locations, listOpen, infowindowOpen, infowindow, map } = this.state;
+    const { locations, listOpen, infowindowOpen, infowindow, map, showFiltered } = this.state;
     console.log(listOpen);
     console.log(infowindowOpen);
     console.log(map);
@@ -128,11 +144,15 @@ class App extends Component {
                       listOpen = {listOpen}
                       infowindow={infowindow}
                       infowindowOpen={infowindowOpen}
-                      map={map} />
+                      map={map}
+                      showFiltered={showFiltered}
+                      filterByName={this.filterByName}
+                      filterCategories={this.filterCategories}/>
         </section>
 
         <section id="map">
           <InfoWindow
+          locations = {locations}
           listOpen = {listOpen}
           infowindow={infowindow}
           infowindowOpen={infowindowOpen}/>

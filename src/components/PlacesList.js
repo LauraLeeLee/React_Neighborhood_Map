@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import categories from '../data/categories.js';
 
 class PlacesList extends Component {
 
@@ -8,7 +9,10 @@ class PlacesList extends Component {
     listOpen: PropTypes.bool.isRequired,
     infowindow: PropTypes.object.isRequired,
     infowindowOpen: PropTypes.bool.isRequired,
-    map: PropTypes.object.isRequired
+    map: PropTypes.object.isRequired,
+    filterByName: PropTypes.func.isRequired,
+    filterCategories: PropTypes.func.isRequired,
+    showFiltered: PropTypes.bool.isRequired
   }
 
   // constructor(props) {
@@ -24,16 +28,23 @@ class PlacesList extends Component {
   // }
 
   render() {
-    const { locations, infowindowOpen, listOpen,  map } = this.props;
+    const { locations, infowindowOpen, listOpen,  map, showFiltered } = this.props;
     console.log({locations});
     console.log({listOpen});
     console.log({map});
     console.log({infowindowOpen});
     return (
       <div>
+        <ul className="categories">
+          {categories.map(category=> (
+            <li key={category}> {category}
+            </li>
+          ))}
+        </ul>
         <ul className="placesList">
           {locations.map(location=> (
-            <li key={location.title}>
+            <li key={location.title}
+                >
               {location.title}
             </li>
           )

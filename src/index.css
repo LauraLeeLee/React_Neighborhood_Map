@@ -36,13 +36,15 @@ h1 {
   height: 100vh;
   grid-row-start: 2;
   grid-column-start: 1;
+  grid-template-rows: 2;
 }
 
 .placesList {
   list-style-type: none;
   color: var(--main-font);
-  margin-top: 40px;
+  margin-top: 20px;
   text-align: left;
+  grid-row-start: 2;
 }
 
 .placesList li {
@@ -50,10 +52,10 @@ h1 {
 }
 
 .toggle-list {
-  grid-row-start: 2;
+  grid-row-start: 1;
   grid-column-start: 1;
   color: var(--main-font);
-
+  margin-top: 80px;
 }
 
 .list-hide {
@@ -62,4 +64,18 @@ h1 {
 
 .list-show {
   display: block;
+}
+
+.categories {
+  grid-row-start: 1;
+}
+
+.categories li {
+  list-style-type: none;
+  background-color: #009933;
+  color: #fff;
+  display: inline-block;
+  border-radius: 3px;
+  padding: 5px;
+  margin: 5px;
 }
