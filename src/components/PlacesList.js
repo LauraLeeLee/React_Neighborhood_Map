@@ -33,18 +33,22 @@ class PlacesList extends Component {
     console.log({listOpen});
     console.log({map});
     console.log({infowindowOpen});
-    return (
+    return(
       <div>
         <ul className="categories">
           {categories.map(category=> (
-            <li key={category}> {category}
+            <li key={category}>
+              {category}
             </li>
           ))}
         </ul>
+        <input id="filter-places"
+              data-bind="textInput: filter"
+              type="text"
+              placeholder="Filter locations by name..."/>
         <ul className="placesList">
           {locations.map(location=> (
-            <li key={location.title}
-                >
+            <li key={location.title}>
               {location.title}
             </li>
           )
