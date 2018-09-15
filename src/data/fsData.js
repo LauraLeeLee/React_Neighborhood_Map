@@ -23,7 +23,8 @@ export const getFSvenues = (florence) => {
       response.json();
     })
     .then(data => {
-      const venues = response.venues;
+      const venues = data.response.venues;
+      console.log(venues);
     });
-    console.log(venues);
+
 }
