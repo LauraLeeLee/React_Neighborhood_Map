@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { mapStyle } from '../data/mapStyle.js';
 // import  locations  from '../data/locations.js';
-import venues from '../data/fsData.js';
+import {venues, getFSvenues} from '../data/fsData.js';
 import scriptLoader from 'react-async-script-loader';
 import PlacesList from './PlacesList.js';
 import InfoWindow from './InfoWindow.js';
@@ -27,6 +27,15 @@ class App extends Component {
   toggleList = () => {
     const { listOpen } = this.state;
     this.setState({listOpen: !listOpen});
+  }
+
+  componentDidMount() {
+    getFSvenues()
+        .then(venues => {
+          this.setState({
+            venues:venues
+          })
+        })
   }
 
   componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
