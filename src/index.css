@@ -89,3 +89,26 @@ h1 {
 ::placeholder {
   color: #d9d9d9;
 }
+
+#places-details {
+  width: 300px;
+  height: 200px;
+  overflow: auto;
+  text-align: center;
+  color: #006622;
+  margin: 0 auto 10px;
+  background-color: #c6ecd9;
+  border-radius: 10px;
+}
+
+ .place-name {
+  background-color: #fff7e6;
+  height: 30px;
+  font-size: 1.4em;
+  text-align: center;
+  border-bottom: 7px double #006622;
+  border-radius: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}

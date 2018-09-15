@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { mapStyle } from '../data/mapStyle.js';
-import  locations  from '../data/locations.js';
+// import  locations  from '../data/locations.js';
+import venues from '../data/fsData.js';
 import scriptLoader from 'react-async-script-loader';
 import PlacesList from './PlacesList.js';
 import InfoWindow from './InfoWindow.js';
@@ -14,47 +15,19 @@ class App extends Component {
       infowindow: {},
       infowindowOpen: false,
       map: {},
-      locations: locations, //data from locations.js file
+      venues: venues,
+      // locations: locations, //data from locations.js file
       showFiltered: true,
     }
     this.toggleList = this.toggleList.bind(this);
-    this.filterByName = this.filterByName.bind(this);
-    this.filterCategories = this.filterCategories.bind(this);
+    // this.filterByName = this.filterByName.bind(this);
+    // this.filterCategories = this.filterCategories.bind(this);
   }
 
   toggleList = () => {
     const { listOpen } = this.state;
     this.setState({listOpen: !listOpen});
     console.log(listOpen);
-  }
-
-  filterByName = () => {
-    var filter = filter().toLowerCase();
-
-    locations().forEach(function(location) {
-      if(location.title.toLowerCase().indexOf(filter) !== -1) {
-        location.showFiltered(true); //show filtered location(s)
-        location.marker.setVisible(true); //show filtered location map marker
-      } else {
-        location.showFiltered(false); // hide non matching list item
-        location.marker.setVisible(false); //hide map marker for non matching
-      }
-    });
-  }
-
-  filterCategories = (filterObj) => {
-    locations().forEach(function(location) {
-    //for loop to check each item in locations property
-      for(var i = 0; i < location.category.length; i++) {
-        if(location.category[i] == filterObj.category) {
-          location.showFiltered(true);
-          location.marker.setVisible(true);
-        } else {
-          location.showFiltered(false);
-          location.marker.setVisible(false);
-        }
-      }
-    });
   }
 
   componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
@@ -64,8 +37,8 @@ class App extends Component {
       if (isScriptLoadSucceed) {
         let map = new window.google.maps.Map(document.getElementById('map'), {
           center: {
-            lat: 41.5916799,
-            lng: 13.2427548
+            lat: 43.7696,
+            lng: 11.2558
           },
             zoom: 13,
             styles: mapStyle,
@@ -75,16 +48,17 @@ class App extends Component {
 
           //create infowindows
           const infowindow = new window.google.maps.InfoWindow({maxWidth: 200});
+          const location = venue.location[lat, lng];
 
-          //create markers
-          this.state.locations.map(location => {
+          // create markers
+          this.state.venues.map(venue => {
             let marker = new window.google.maps.Marker({
         			map: map,
-        			position: location.location,
-        			title: location.title,
+        			position: venue.location,
+        			title: venue.name,
         			animation: window.google.maps.Animation.DROP,
         			// icon: defaultIcon,
-        			id: location.id,
+        			id: venue.id,
         			open: false
         		});
 
@@ -116,7 +90,6 @@ class App extends Component {
           });
 
         console.log(map);
-        console.log(locations);
         }
       }
       // else this.props.onError()

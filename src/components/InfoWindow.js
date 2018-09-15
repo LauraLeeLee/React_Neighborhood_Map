@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 class InfoWindow extends Component {
   static propTypes = {
-    locations: PropTypes.array.isRequired,
+    // locations: PropTypes.array.isRequired,
     listOpen: PropTypes.bool.isRequired,
     infowindowOpen: PropTypes.bool.isRequired,
     infowindow: PropTypes.object.isRequired

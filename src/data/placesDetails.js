@@ -6,27 +6,26 @@ export const populateInfoWindow = (marker, infowindow, map) => {
 		//clear the infowindow content allowing streetview to load
 		infowindow.setContent('');
 		infowindow.marker = marker;
-		getPlacesDetails(marker, infowindow);
+		getPlacesDetails(marker, infowindow, map);
 		//see if the marker property is cleared if infowindow is closed
 		infowindow.addListener('closeclick', function() {
-			// vm.showMe(true);
-			// vm.showFS(true);
 			infowindow.marker = null;
 			// marker.setIcon(defaultIcon);
 			// vm.fourSqFinds([]);
 		});
 		//open the infowindow on the proper marker
-		infowindow.open(map, marker);
-		marker.setAnimation(window.google.maps.Animation.BOUNCE);
-		setTimeout(function() {
-			marker.setAnimation(null);
-		}, 5000);
+		// infowindow.open(map, marker);
+		// marker.setAnimation(window.google.maps.Animation.BOUNCE);
+		// setTimeout(function() {
+		// 	marker.setAnimation(null);
+		// }, 5000);
 	}
 }
 
 //gets place details from place_id via PlacesService
 export const getPlacesDetails = (marker, infowindow, map) => {
 	let service = new window.google.maps.places.PlacesService(map);
+
 	service.getDetails({
 		placeId: marker.id
 	}, function(place, status) {
