@@ -35,7 +35,7 @@ class PlacesList extends Component {
 
   render() {
     const { locations, infowindowOpen, listOpen,  map, showFiltered } = this.props;
-    console.log({locations});
+    // console.log({locations});
     console.log({listOpen});
     console.log({map});
     console.log({infowindowOpen});

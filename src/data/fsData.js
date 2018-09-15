@@ -16,7 +16,7 @@ const categoryId=categories.map(value => value.value);
 //create category key array
 const categoryName=categories.map(key => key.key);
 
-export const getFSvenues = (florence) => {
+export const getFSvenues = () => {
   const urlRequest = `https://api.foursquare.com/v2/venues/search?ll=43.7696,11.2558&client_id=${clientId}&client_secret=${clientSecret}&categoryId=${categoryId}&radius=1609&limit=50`;
   return fetch(getFSvenues)
     .then(response => {
