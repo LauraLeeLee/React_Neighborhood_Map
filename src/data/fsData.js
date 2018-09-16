@@ -17,18 +17,21 @@ const categoryId=categories.map(value => value.value);
 //create category key array
 const categoryName=categories.map(key => key.key);
 
+const fourSqUrl = "https://api.foursquare.com/v2/venues/";
+const versDate = 20180916;
+
 export const getFSvenues = (centerMap) => {
-  const urlRequest = `https://api.foursquare.com/v2/venues/search?ll=${centerMap.lat},
-    ${centerMap.lng}&client_id=${clientId}&client_secret=${clientSecret}&v=20180916&categoryId=${categoryId}&radius=1609&limit=50`;
-  return fetch(getFSvenues)
-    // .then(response => {
-    //   response.json();
-    // })
-    .then(res => res.text())          // convert to plain text
-    .then(text => console.log(text));
-    // .then(data => {
-    //   const venues = data.response.venues;
-    //   console.log(venues);
-    // });
+  const urlRequest = `${fourSqUrl}search?ll=${centerMap.lat},
+    ${centerMap.lng}&client_id=${clientId}&client_secret=${clientSecret}&v=${versDate}&categoryId=${categoryId}&radius=1609&limit=50`;
+  return fetch(urlRequest)
+    .then(response => {
+      response.json();
+    })
+    // .then(res => res.text())          // convert to plain text
+    // .then(text => console.log(text));
+    .then(data => {
+      const venues = data.response.venues;
+      console.log(venues);
+    });
 
 }
