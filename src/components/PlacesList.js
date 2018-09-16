@@ -36,10 +36,10 @@ class PlacesList extends Component {
   render() {
     const { locations, infowindowOpen, listOpen,  map, showFiltered } = this.props;
     // console.log({locations});
-    console.log({listOpen});
-    console.log({map});
-    console.log({infowindowOpen});
-    console.log({showFiltered});
+    // console.log({listOpen});
+    // console.log({map});
+    // console.log({infowindowOpen});
+    // console.log({showFiltered});
     return(
       <div>
         <ul className="categories">

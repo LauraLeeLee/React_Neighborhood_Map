@@ -12,8 +12,8 @@ class InfoWindow extends Component {
   }
   render() {
     const {listOpen, infowindowOpen, locations } = this.props;
-    console.log({listOpen});
-    console.log({infowindowOpen});
+    // console.log({listOpen});
+    // console.log({infowindowOpen});
 
     return(
       <div>infowindow</div>

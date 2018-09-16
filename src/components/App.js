@@ -43,12 +43,12 @@ class App extends Component {
   }
 
   componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
-    const { marker, infowindow, map, centerMap } = this.state;
+    const { marker, infowindow, map, centerMap, venues } = this.state;
     // const { isScriptLoaded, isScriptLoadSucceed } = this.props;
     if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
       if (isScriptLoadSucceed) {
         let map = new window.google.maps.Map(document.getElementById('map'), {
-          center: centerMap,
+            center: centerMap,
             zoom: 13,
             styles: mapStyle,
             gestureHandling: 'greedy',
@@ -98,7 +98,7 @@ class App extends Component {
           //   infowindow: infowindow,
           // });
 
-        console.log(map);
+        // console.log(map);
         }
       }
       // else this.props.onError()
@@ -108,10 +108,10 @@ class App extends Component {
 
   render() {
     const { locations, listOpen, infowindowOpen, infowindow, map, showFiltered } = this.state;
-    console.log(listOpen);
-    console.log(infowindowOpen);
-    console.log(map);
-    console.log(this.toggleList);
+    // console.log(listOpen);
+    // console.log(infowindowOpen);
+    // console.log(map);
+    // console.log(this.toggleList);
     return (
       <div className="container">
         <h1>Neighborhood Map</h1>
