@@ -25,7 +25,11 @@ export const getFSvenues = (centerMap) => {
     ${centerMap.lng}&client_id=${clientId}&client_secret=${clientSecret}&v=${versDate}&categoryId=${categoryId}&radius=1609&limit=50`;
   return fetch(urlRequest)
     .then(response => {
-      response.json();
+      if(!response.ok ){
+        console.log("error when retrieving venues");
+      } else {
+        return response.json();
+      }
     })
     // .then(res => res.text())          // convert to plain text
     // .then(text => console.log(text));

@@ -60,45 +60,45 @@ class App extends Component {
           // const location = venue.location[lat, lng];
 
           // create markers
-          // this.state.venues.map(venue => {
-          //   let marker = new window.google.maps.Marker({
-        	// 		map: map,
-        	// 		position: venue.location,
-        	// 		title: venue.name,
-        	// 		animation: window.google.maps.Animation.DROP,
-        	// 		// icon: defaultIcon,
-        	// 		id: venue.id,
-        	// 		open: false
-        	// 	});
-          //
-          //   //adds click to markers with bounce
-          //   marker.addListener('click', function() {
-          //     const marker = this;
-          //       marker.setAnimation(window.google.maps.Animation.BOUNCE);
-          //       setTimeout(function() {
-          //         marker.setAnimation(null);
-          //       }, 2500);
-          //
-          //     populateInfoWindow(marker, infowindow, map);
-          //
-          //     //get locations information
-          //
-          //     //create infowindow
-          //     // marker.infowindow = `div class="infowindow">
-          //     //                       <div class="item-info">
-          //     //                         <h3 class="item-name">
-          //     //                       </div>
-          //     //                     </div>`
-          //
-          //     });
-          //   });
-          //
-          // this.setState({
-          //   map: map,
-          //   infowindow: infowindow,
-          // });
+          this.state.venues.map(venue => {
+            let marker = new window.google.maps.Marker({
+        			map: map,
+        			position: venue.location,
+        			title: venue.name,
+        			animation: window.google.maps.Animation.DROP,
+        			// icon: defaultIcon,
+        			id: venue.id,
+        			open: false
+        		});
 
-        // console.log(map);
+            //adds click to markers with bounce
+            marker.addListener('click', function() {
+              const marker = this;
+                marker.setAnimation(window.google.maps.Animation.BOUNCE);
+                setTimeout(function() {
+                  marker.setAnimation(null);
+                }, 2500);
+
+              populateInfoWindow(marker, infowindow, map);
+
+              //get locations information
+
+              //create infowindow
+              // marker.infowindow = `div class="infowindow">
+              //                       <div class="item-info">
+              //                         <h3 class="item-name">
+              //                       </div>
+              //                     </div>`
+
+              });
+            });
+
+          this.setState({
+            map: map,
+            infowindow: infowindow,
+          });
+
+        console.log(map);
         }
       }
       // else this.props.onError()
