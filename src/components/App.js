@@ -15,6 +15,10 @@ class App extends Component {
       infowindow: {},
       infowindowOpen: false,
       map: {},
+      centerMap: {
+        lat: 43.7696,
+        lng: 11.2558
+      },
       venues: [],
       // locations: locations, //data from locations.js file
       showFiltered: true,
@@ -30,7 +34,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    getFSvenues()
+    getFSvenues(this.state.centerMap)
         .then(venues => {
           this.setState({
             venues:venues
@@ -39,15 +43,12 @@ class App extends Component {
   }
 
   componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
-    const { marker, infowindow, map } = this.state;
+    const { marker, infowindow, map, centerMap } = this.state;
     // const { isScriptLoaded, isScriptLoadSucceed } = this.props;
     if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
       if (isScriptLoadSucceed) {
         let map = new window.google.maps.Map(document.getElementById('map'), {
-          center: {
-            lat: 43.7696,
-            lng: 11.2558
-          },
+          center: centerMap,
             zoom: 13,
             styles: mapStyle,
             gestureHandling: 'greedy',
@@ -59,43 +60,43 @@ class App extends Component {
           // const location = venue.location[lat, lng];
 
           // create markers
-          this.state.venues.map(venue => {
-            let marker = new window.google.maps.Marker({
-        			map: map,
-        			position: venue.location,
-        			title: venue.name,
-        			animation: window.google.maps.Animation.DROP,
-        			// icon: defaultIcon,
-        			id: venue.id,
-        			open: false
-        		});
-
-            //adds click to markers with bounce
-            marker.addListener('click', function() {
-              const marker = this;
-                marker.setAnimation(window.google.maps.Animation.BOUNCE);
-                setTimeout(function() {
-                  marker.setAnimation(null);
-                }, 2500);
-
-              populateInfoWindow(marker, infowindow, map);
-
-              //get locations information
-
-              //create infowindow
-              // marker.infowindow = `div class="infowindow">
-              //                       <div class="item-info">
-              //                         <h3 class="item-name">
-              //                       </div>
-              //                     </div>`
-
-              });
-            });
-
-          this.setState({
-            map: map,
-            infowindow: infowindow,
-          });
+          // this.state.venues.map(venue => {
+          //   let marker = new window.google.maps.Marker({
+        	// 		map: map,
+        	// 		position: venue.location,
+        	// 		title: venue.name,
+        	// 		animation: window.google.maps.Animation.DROP,
+        	// 		// icon: defaultIcon,
+        	// 		id: venue.id,
+        	// 		open: false
+        	// 	});
+          //
+          //   //adds click to markers with bounce
+          //   marker.addListener('click', function() {
+          //     const marker = this;
+          //       marker.setAnimation(window.google.maps.Animation.BOUNCE);
+          //       setTimeout(function() {
+          //         marker.setAnimation(null);
+          //       }, 2500);
+          //
+          //     populateInfoWindow(marker, infowindow, map);
+          //
+          //     //get locations information
+          //
+          //     //create infowindow
+          //     // marker.infowindow = `div class="infowindow">
+          //     //                       <div class="item-info">
+          //     //                         <h3 class="item-name">
+          //     //                       </div>
+          //     //                     </div>`
+          //
+          //     });
+          //   });
+          //
+          // this.setState({
+          //   map: map,
+          //   infowindow: infowindow,
+          // });
 
         console.log(map);
         }

@@ -13,18 +13,21 @@ const categories = [
 
 //create id array
 const categoryId=categories.map(value => value.value);
+// console.log(categoryId);
 //create category key array
 const categoryName=categories.map(key => key.key);
 
 export const getFSvenues = () => {
-  const urlRequest = `https://api.foursquare.com/v2/venues/search?ll=43.7696,11.2558&client_id=${clientId}&client_secret=${clientSecret}&categoryId=${categoryId}&radius=1609&limit=50`;
+  const urlRequest = `https://api.foursquare.com/v2/venues/search?ll=centerMap&client_id=${clientId}&client_secret=${clientSecret}&categoryId=${categoryId}&radius=1609&limit=50`;
   return fetch(getFSvenues)
-    .then(response => {
-      response.json();
-    })
-    .then(data => {
-      const venues = data.response.venues;
-      console.log(venues);
-    });
+    // .then(response => {
+    //   response.json();
+    // })
+    .then(res => res.text())          // convert to plain text
+    .then(text => console.log(text));
+    // .then(data => {
+    //   const venues = data.response.venues;
+    //   console.log(venues);
+    // });
 
 }
