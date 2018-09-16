@@ -19,7 +19,7 @@ const categoryName=categories.map(key => key.key);
 
 export const getFSvenues = (centerMap) => {
   const urlRequest = `https://api.foursquare.com/v2/venues/search?ll=${centerMap.lat},
-    ${centerMap.lng}&client_id=${clientId}&client_secret=${clientSecret}&categoryId=${categoryId}&radius=1609&limit=50`;
+    ${centerMap.lng}&client_id=${clientId}&client_secret=${clientSecret}&v=20180916&categoryId=${categoryId}&radius=1609&limit=50`;
   return fetch(getFSvenues)
     // .then(response => {
     //   response.json();
