@@ -20,7 +20,6 @@ class App extends Component {
         lng: 11.2558
       },
       venues: [],
-      // locations: locations, //data from locations.js file
       showFiltered: true,
     }
     this.toggleList = this.toggleList.bind(this);
@@ -38,8 +37,9 @@ class App extends Component {
         .then(venues => {
           this.setState({
             venues:venues
-          })
-        })
+          });
+        });
+        console.log(this.state.venues);
   }
 
   componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
@@ -58,7 +58,7 @@ class App extends Component {
           //create infowindows
           const infowindow = new window.google.maps.InfoWindow({maxWidth: 200});
           // const location = venue.location[lat, lng];
-
+          console.log({venues});
           // create markers
           this.state.venues.map(venue => {
             let marker = new window.google.maps.Marker({

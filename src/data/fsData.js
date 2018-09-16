@@ -36,6 +36,7 @@ export const getFSvenues = (centerMap) => {
     .then(data => {
       const venues = data.response.venues;
       console.log(venues);
+      return venues;
     });
 
 }
