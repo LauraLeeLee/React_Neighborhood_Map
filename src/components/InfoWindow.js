@@ -8,7 +8,7 @@ class InfoWindow extends Component {
     // locations: PropTypes.array.isRequired,
     listOpen: PropTypes.bool.isRequired,
     infowindowOpen: PropTypes.bool.isRequired,
-    infowindow: PropTypes.object.isRequired
+    // infowindow: PropTypes.object.isRequired
   }
   render() {
     const {listOpen, infowindowOpen, locations } = this.props;

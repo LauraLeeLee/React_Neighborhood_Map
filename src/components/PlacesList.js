@@ -7,9 +7,9 @@ class PlacesList extends Component {
   static propTypes = {
     // locations: PropTypes.array.isRequired,
     listOpen: PropTypes.bool.isRequired,
-    infowindow: PropTypes.object.isRequired,
-    infowindowOpen: PropTypes.bool.isRequired,
-    map: PropTypes.object.isRequired,
+    // infowindow: PropTypes.object.isRequired,
+    // infowindowOpen: PropTypes.bool.isRequired,
+    // map: PropTypes.object.isRequired,
     // filterByName: PropTypes.func.isRequired,
     // filterCategories: PropTypes.func.isRequired,
     showFiltered: PropTypes.bool.isRequired

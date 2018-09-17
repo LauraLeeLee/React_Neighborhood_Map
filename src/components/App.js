@@ -12,9 +12,9 @@ class App extends Component {
     super(props);
     this.state = {
       listOpen: true,
-      infowindow: {},
+      infoWindow: {},
       infowindowOpen: false,
-      map: {},
+      myMap: {},
       centerMap: {
         lat: 43.7696,
         lng: 11.2558
@@ -50,7 +50,7 @@ class App extends Component {
 
   componentDidMount() {
     const { isScriptLoaded, isScriptLoadSucceed } = this.props
-    const { marker, infowindow, map, centerMap, mapIsReady, mapError, venues } = this.state;
+    const { marker, infoWindow, myMap, centerMap, mapIsReady, mapError, venues } = this.state;
 
     if (isScriptLoaded && isScriptLoadSucceed) {
       let map = new window.google.maps.Map(document.getElementById('map'), {
@@ -65,9 +65,9 @@ class App extends Component {
         const infowindow = new window.google.maps.InfoWindow({maxWidth: 200});
 
         this.setState({
-          map: map,
+          myMap: map,
           mapIsReady: true,
-          infowindow: infowindow,
+          infoWindow: infowindow,
         });
 
         // create markers
@@ -107,8 +107,6 @@ class App extends Component {
       // }
     }
   }
-
-
 
   render() {
     const { locations, listOpen, infowindowOpen, infowindow, map, showFiltered } = this.state;
