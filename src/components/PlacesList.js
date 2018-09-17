@@ -63,11 +63,7 @@ class PlacesList extends Component {
           }, 2500);
       });
     });
-
-
   }
-
-
   // handleToggle(e) {
   //   const {listOpen} = this.props;
   //   const togglingList = e.targer.value;
