@@ -34,9 +34,15 @@ export const getFSvenues = (centerMap) => {
     // .then(res => res.text())          // convert to plain text
     // .then(text => console.log(text));
     .then(data => {
+
       const venues = data.response.venues;
-      console.log(venues);
-      return venues;
+      const realVenues = venues.filter(venue =>
+          venue.location.address && venue.location.city
+        );
+      console.log(realVenues.map(venue => venue.location.formattedAddress));
+      return realVenues;
+
+
     });
 
 }

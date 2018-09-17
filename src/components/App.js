@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { mapStyle } from '../data/mapStyle.js';
 // import  locations  from '../data/locations.js';
-import {venues, getFSvenues} from '../data/fsData.js';
+import { getFSvenues, realVenues} from '../data/fsData.js';
 import scriptLoader from 'react-async-script-loader';
 import PlacesList from './PlacesList.js';
 import InfoWindow from './InfoWindow.js';
@@ -19,6 +19,8 @@ class App extends Component {
         lat: 43.7696,
         lng: 11.2558
       },
+      mapIsReady: false,
+      mapError: false,
       venues: [],
       showFiltered: true,
     }
@@ -32,77 +34,79 @@ class App extends Component {
     this.setState({listOpen: !listOpen});
   }
 
+  // componentDidMount() {
+  //   if(this.state.map == map) {
+  //     getFSvenues(this.state.centerMap)
+  //       .then(realVenues => {
+  //         this.setState({
+  //           venues:realVenues
+  //         });
+  //       });
+  //       console.log(this.state.venues);
+  //     } else {
+  //       console.log("no map created");
+  //     }
+  //   }
+
   componentDidMount() {
-    getFSvenues(this.state.centerMap)
-        .then(venues => {
-          this.setState({
-            venues:venues
-          });
+    const { isScriptLoaded, isScriptLoadSucceed } = this.props
+    const { marker, infowindow, map, centerMap, mapIsReady, mapError, venues } = this.state;
+
+    if (isScriptLoaded && isScriptLoadSucceed) {
+      let map = new window.google.maps.Map(document.getElementById('map'), {
+          center: centerMap,
+          zoom: 13,
+          styles: mapStyle,
+          gestureHandling: 'greedy',
+          mapTypeControl: false
         });
-        console.log(this.state.venues);
-  }
 
-  componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
-    const { marker, infowindow, map, centerMap, venues } = this.state;
-    // const { isScriptLoaded, isScriptLoadSucceed } = this.props;
-    if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
-      if (isScriptLoadSucceed) {
-        let map = new window.google.maps.Map(document.getElementById('map'), {
-            center: centerMap,
-            zoom: 13,
-            styles: mapStyle,
-            gestureHandling: 'greedy',
-            mapTypeControl: false
-          });
+        //create infowindows
+        const infowindow = new window.google.maps.InfoWindow({maxWidth: 200});
 
-          //create infowindows
-          const infowindow = new window.google.maps.InfoWindow({maxWidth: 200});
-          // const location = venue.location[lat, lng];
-          console.log({venues});
-          // create markers
-          this.state.venues.map(venue => {
-            let marker = new window.google.maps.Marker({
-        			map: map,
-        			position: venue.location,
-        			title: venue.name,
-        			animation: window.google.maps.Animation.DROP,
-        			// icon: defaultIcon,
-        			id: venue.id,
-        			open: false
-        		});
+        this.setState({
+          map: map,
+          mapIsReady: true,
+          infowindow: infowindow,
+        });
 
-            //adds click to markers with bounce
-            marker.addListener('click', function() {
-              const marker = this;
-                marker.setAnimation(window.google.maps.Animation.BOUNCE);
-                setTimeout(function() {
-                  marker.setAnimation(null);
-                }, 2500);
+        // create markers
+        // venues.map(venue => µ{
+        //   // let position ={venue.location.lat, venue.location.lng};
+        //   let marker = new window.google.maps.Marker({
+      	// 		map: map,
+      	// 		position: venue.location,
+      	// 		title: venue.name,
+      	// 		animation: window.google.maps.Animation.DROP,
+      	// 		// icon: defaultIcon,
+      	// 		id: venue.id,
+      	// 		open: false
+      	// 	});
 
-              populateInfoWindow(marker, infowindow, map);
-
-              //get locations information
-
-              //create infowindow
-              // marker.infowindow = `div class="infowindow">
-              //                       <div class="item-info">
-              //                         <h3 class="item-name">
-              //                       </div>
-              //                     </div>`
-
-              });
-            });
-
-          this.setState({
-            map: map,
-            infowindow: infowindow,
-          });
-
-        console.log(map);
-        }
-      }
-      // else this.props.onError()
+          //adds click to markers with bounce
+          // marker.addListener('click', function() {
+          //   const marker = this;
+          //     marker.setAnimation(window.google.maps.Animation.BOUNCE);
+          //     setTimeout(function() {
+          //       marker.setAnimation(null);
+          //     }, 2500);
+          //
+          //   populateInfoWindow(marker, infowindow, map);
+          //
+          //   //get locations information
+          //
+          //   //create infowindow
+          //   // marker.infowindow = `div class="infowindow">
+          //   //                       <div class="item-info">
+          //   //                         <h3 class="item-name">
+          //   //                       </div>
+          //   //                     </div>`
+          //
+          //   });
+          // });
+      // }
     }
+  }
 
 
 
