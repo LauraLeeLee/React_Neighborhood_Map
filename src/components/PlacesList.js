@@ -32,10 +32,10 @@ class PlacesList extends Component {
       this.setState({
         venues:realVenues
       });
+      if(realVenues) {
+        this.createMarkers(realVenues);
+      }
     });
-    if(realVenues) {
-      this.createMarkers(realVenues);
-    }
   }
 
   // create markers
