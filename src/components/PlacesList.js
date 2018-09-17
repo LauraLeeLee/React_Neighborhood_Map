@@ -14,16 +14,15 @@ class PlacesList extends Component {
     // filterByName: PropTypes.func.isRequired,
     // filterCategories: PropTypes.func.isRequired,
     showFiltered: PropTypes.bool.isRequired
-  };
+  }
 
   constructor(props) {
     super(props);
-
     this.state = {
       venues: [],
-    }
+    };
     // this.handleToggle = this.handleToggle.bind(this);
-    this.handleCategories = this.handleCategories.bind(this);
+    // this.handleCategories = this.handleCategories.bind(this);
   }
 
   componentDidMount() {
