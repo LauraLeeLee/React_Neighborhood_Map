@@ -38,7 +38,7 @@ class PlacesList extends Component {
   }
 
   // create markers
-  createMarkers() {
+  createMarkers(realVenues) {
     const {myMap, centerMap, } = this.props;
     const {venues} = this.state;
     venues.map(venue => {
@@ -52,8 +52,21 @@ class PlacesList extends Component {
     		id: venue.id,
     		open: false
     	});
+
+      //adds click to markers
+      marker.addListener('click', function() {
+        const marker = this;
+          //adds bounce to marker when clicked
+          marker.setAnimation(window.google.maps.Animation.BOUNCE);
+          setTimeout(function() {
+            marker.setAnimation(null);
+          }, 2500);
+      });
     });
+
+
   }
+
 
   // handleToggle(e) {
   //   const {listOpen} = this.props;
@@ -68,7 +81,7 @@ class PlacesList extends Component {
   // }
 
   render() {
-    const { infoWindow, infowindowOpen, listOpen,  myMap, showFiltered } = this.props;
+    const {listOpen, showFiltered } = this.props;
     const { venues } = this.state;
 
       console.log({venues});
@@ -89,9 +102,11 @@ class PlacesList extends Component {
               type="text"
               placeholder="Filter locations by name..."/>
         <ul className="placesList">
-            <li>
-              list item
-            </li>
+              {venues.map(venue => (
+                <li key={venue.id}>
+                  {venue.name}
+                  </li>
+              ))}
         </ul>
       </div>
     );

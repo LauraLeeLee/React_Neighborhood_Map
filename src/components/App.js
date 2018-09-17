@@ -40,7 +40,7 @@ class App extends Component {
     if (isScriptLoadSucceed && !this.state.mapIsReady) {
       let map = new window.google.maps.Map(document.getElementById('map'), {
           center: centerMap,
-          zoom: 13,
+          zoom: 14,
           styles: mapStyle,
           gestureHandling: 'greedy',
           mapTypeControl: false
