@@ -41,8 +41,5 @@ export const getFSvenues = (centerMap) => {
         );
       console.log(realVenues.map(venue => venue.location.formattedAddress));
       return realVenues;
-
-
     });
-
 }

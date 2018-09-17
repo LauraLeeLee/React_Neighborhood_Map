@@ -1,24 +1,59 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import categories from '../data/categories.js';
+import { getFSvenues } from '../data/fsData.js';
 
 class PlacesList extends Component {
 
   static propTypes = {
-    // locations: PropTypes.array.isRequired,
     listOpen: PropTypes.bool.isRequired,
-    // infowindow: PropTypes.object.isRequired,
+    infoWindow: PropTypes.object.isRequired,
     // infowindowOpen: PropTypes.bool.isRequired,
-    // map: PropTypes.object.isRequired,
+    myMap: PropTypes.object.isRequired,
+    centerMap: PropTypes.object.isRequired,
     // filterByName: PropTypes.func.isRequired,
     // filterCategories: PropTypes.func.isRequired,
     showFiltered: PropTypes.bool.isRequired
-  }
+  };
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      venues: [],
+    }
     // this.handleToggle = this.handleToggle.bind(this);
     this.handleCategories = this.handleCategories.bind(this);
+  }
+
+  componentDidMount() {
+    getFSvenues(this.props.centerMap)
+    .then(realVenues => {
+      this.setState({
+        venues:realVenues
+      });
+    });
+    if(realVenues) {
+      this.createMarkers(realVenues);
+    }
+  }
+
+  // create markers
+  createMarkers() {
+    const {myMap, centerMap, } = this.props;
+    const {venues} = this.state;
+    venues.map(venue => {
+      // let position ={venue.location.lat, venue.location.lng};
+      let marker = new window.google.maps.Marker({
+    		map: myMap,
+    		position: venue.location,
+    		title: venue.name,
+    		animation: window.google.maps.Animation.DROP,
+    		// icon: defaultIcon,
+    		id: venue.id,
+    		open: false
+    	});
+    });
   }
 
   // handleToggle(e) {
@@ -28,18 +63,17 @@ class PlacesList extends Component {
   //   console.log('list open:' );
   // }
 
-  handleCategories(e) {
-
-    this.props.filterCategories();
-  }
+  // handleCategories(e) {
+  //
+  //   this.props.filterCategories();
+  // }
 
   render() {
-    const { locations, infowindowOpen, listOpen,  map, showFiltered } = this.props;
-    // console.log({locations});
-    // console.log({listOpen});
-    // console.log({map});
-    // console.log({infowindowOpen});
-    // console.log({showFiltered});
+    const { infoWindow, infowindowOpen, listOpen,  myMap, showFiltered } = this.props;
+    const { venues } = this.state;
+
+      console.log({venues});
+
     return(
       <div>
         <ul className="categories">

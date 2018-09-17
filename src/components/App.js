@@ -21,37 +21,17 @@ class App extends Component {
       },
       mapIsReady: false,
       mapError: false,
-      venues: [],
       showFiltered: true,
     }
     this.toggleList = this.toggleList.bind(this);
     // this.filterByName = this.filterByName.bind(this);
     // this.filterCategories = this.filterCategories.bind(this);
-    this.logOutStates = this.logOutStates.bind(this);
-  }
-
-  logOutStates = () => {
-    console.log(this.state);
   }
 
   toggleList = () => {
     const { listOpen } = this.state;
     this.setState({listOpen: !listOpen});
   }
-
-  // componentDidMount() {
-  //   if(this.state.map == map) {
-  //     getFSvenues(this.state.centerMap)
-  //       .then(realVenues => {
-  //         this.setState({
-  //           venues:realVenues
-  //         });
-  //       });
-  //       console.log(this.state.venues);
-  //     } else {
-  //       console.log("no map created");
-  //     }
-  //   }
 
    componentDidUpdate({ isScriptLoadSucceed }) {
     // const { isScriptLoaded, isScriptLoadSucceed } = this.props
@@ -74,42 +54,6 @@ class App extends Component {
           mapIsReady: true,
           infoWindow: infowindow,
         });
-
-        // create markers
-        // venues.map(venue => µ{
-        //   // let position ={venue.location.lat, venue.location.lng};
-        //   let marker = new window.google.maps.Marker({
-      	// 		map: map,
-      	// 		position: venue.location,
-      	// 		title: venue.name,
-      	// 		animation: window.google.maps.Animation.DROP,
-      	// 		// icon: defaultIcon,
-      	// 		id: venue.id,
-      	// 		open: false
-      	// 	});
-
-          //adds click to markers with bounce
-          // marker.addListener('click', function() {
-          //   const marker = this;
-          //     marker.setAnimation(window.google.maps.Animation.BOUNCE);
-          //     setTimeout(function() {
-          //       marker.setAnimation(null);
-          //     }, 2500);
-          //
-          //   populateInfoWindow(marker, infowindow, map);
-          //
-          //   //get locations information
-          //
-          //   //create infowindow
-          //   // marker.infowindow = `div class="infowindow">
-          //   //                       <div class="item-info">
-          //   //                         <h3 class="item-name">
-          //   //                       </div>
-          //   //                     </div>`
-          //
-          //   });
-          // });
-      // }
     } else if (!this.state.mapIsReady) {
       this.setState({ mapError: true });
     }
@@ -117,11 +61,9 @@ class App extends Component {
 
 
   render() {
-    const { locations, listOpen, infowindowOpen, infowindow, myMap, showFiltered } = this.state;
-    // console.log(listOpen);
-    // console.log(infowindowOpen);
-    // console.log(map);
-    // console.log(this.toggleList);
+        console.log(this.state);
+    const { listOpen, infowindowOpen, infoWindow, myMap, showFiltered, centerMap } = this.state;
+
     return (
       <div className="container">
         <h1>Neighborhood Map</h1>
@@ -132,22 +74,22 @@ class App extends Component {
         </h5>
         <section id="listSection"
                  className={ listOpen ? "list-show" : "list-hide"} >
-          <PlacesList locations = {locations}
-                      listOpen = {listOpen}
-                      infowindow={infowindow}
-                      infowindowOpen={infowindowOpen}
-                      map={myMap}
-                      showFiltered={showFiltered}
-                      filterByName={this.filterByName}
-                      filterCategories={this.filterCategories}/>
+          <PlacesList
+            listOpen = {listOpen}
+            infoWindow={infoWindow}
+            infowindowOpen={infowindowOpen}
+            myMap={myMap}
+            centerMap={centerMap}
+            showFiltered={showFiltered}
+            filterByName={this.filterByName}
+            filterCategories={this.filterCategories}/>
         </section>
 
         <section id="map">
           <InfoWindow
-          locations = {locations}
-          listOpen = {listOpen}
-          infowindow={infowindow}
-          infowindowOpen={infowindowOpen}/>
+            listOpen = {listOpen}
+            infoWindow={infoWindow}
+            infowindowOpen={infowindowOpen}/>
         </section>
       </div>
     );
