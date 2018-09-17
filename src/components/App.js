@@ -27,6 +27,11 @@ class App extends Component {
     this.toggleList = this.toggleList.bind(this);
     // this.filterByName = this.filterByName.bind(this);
     // this.filterCategories = this.filterCategories.bind(this);
+    this.logOutStates = this.logOutStates.bind(this);
+  }
+
+  logOutStates = () => {
+    console.log(this.state);
   }
 
   toggleList = () => {
@@ -48,11 +53,11 @@ class App extends Component {
   //     }
   //   }
 
-  componentDidMount() {
-    const { isScriptLoaded, isScriptLoadSucceed } = this.props
+   componentDidUpdate({ isScriptLoadSucceed }) {
+    // const { isScriptLoaded, isScriptLoadSucceed } = this.props
     const { marker, infoWindow, myMap, centerMap, mapIsReady, mapError, venues } = this.state;
 
-    if (isScriptLoaded && isScriptLoadSucceed) {
+    if (isScriptLoadSucceed && !this.state.mapIsReady) {
       let map = new window.google.maps.Map(document.getElementById('map'), {
           center: centerMap,
           zoom: 13,
@@ -105,11 +110,14 @@ class App extends Component {
           //   });
           // });
       // }
+    } else if (!this.state.mapIsReady) {
+      this.setState({ mapError: true });
     }
   }
 
+
   render() {
-    const { locations, listOpen, infowindowOpen, infowindow, map, showFiltered } = this.state;
+    const { locations, listOpen, infowindowOpen, infowindow, myMap, showFiltered } = this.state;
     // console.log(listOpen);
     // console.log(infowindowOpen);
     // console.log(map);
@@ -128,7 +136,7 @@ class App extends Component {
                       listOpen = {listOpen}
                       infowindow={infowindow}
                       infowindowOpen={infowindowOpen}
-                      map={map}
+                      map={myMap}
                       showFiltered={showFiltered}
                       filterByName={this.filterByName}
                       filterCategories={this.filterCategories}/>
