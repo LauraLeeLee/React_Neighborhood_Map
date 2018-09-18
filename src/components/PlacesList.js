@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import categories from '../data/categories.js';
-import { getFSvenues } from '../data/fsData.js';
+// import categories from '../data/categories.js';
+import { getFSvenues, getFSdetails, categoryName } from '../data/fsData.js';
 
 class PlacesList extends Component {
 
@@ -61,7 +61,12 @@ class PlacesList extends Component {
           setTimeout(function() {
             marker.setAnimation(null);
           }, 2500);
+        getFSdetails(marker.id)
+          .then(data => {
+
+          })
       });
+
     });
   }
   // handleToggle(e) {
@@ -85,11 +90,11 @@ class PlacesList extends Component {
     return(
       <div>
         <ul className="categories">
-          {categories.map(category=> (
-            <li key={category}
+          {categoryName.map(name => (
+            <li key={name}
                 onClick={this.handleCategories}
                >
-              {category}
+              {name}
             </li>
           ))}
         </ul>

@@ -15,7 +15,7 @@ const categories = [
 const categoryId=categories.map(value => value.value);
 // console.log(categoryId);
 //create category key array
-const categoryName=categories.map(key => key.key);
+export const categoryName=categories.map(key => key.key);
 
 const fourSqUrl = "https://api.foursquare.com/v2/venues/";
 const versDate = 20180916;
@@ -39,7 +39,26 @@ export const getFSvenues = (centerMap) => {
       const realVenues = venues.filter(venue =>
           venue.location.address && venue.location.city
         );
-      console.log(realVenues.map(venue => venue.location.formattedAddress));
+      console.log(realVenues);
       return realVenues;
     });
-}
+};
+
+export const getFSdetails = (fsid) => {
+  const fourSqId = fsid;
+  const detailsUrl = `${fourSqUrl}${fourSqId}?client_id=${clientId}&client_secret=${clientSecret}&v=${versDate}`
+
+  return fetch(detailsUrl)
+    .then(response => {
+      if(!response.ok ){
+        console.log("error when retrieving venues");
+      }else {
+          return response.json();
+      }
+  })
+  .then(data => {
+    const details = data.response;
+    console.log(details);
+    return details;
+  });
+};
