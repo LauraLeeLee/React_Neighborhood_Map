@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import  locations  from '../data/locations.js';
 import PlacesList from './PlacesList.js';
 import PropTypes from 'prop-types';
 

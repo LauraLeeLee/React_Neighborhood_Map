@@ -1,3 +1,36 @@
+//create content and fallback
+
+export const gatherContent = (marker, data) => {
+	const locale = data.response.venue;
+
+	const {canonicaUrl, description, location, name, bestPhoto, contact, categories} = locale;
+
+	marker.url = canonicaUrl ? canonicaUrl : "No webaddress found";
+	marker.description = description ? description : "No description found";
+	marker.name = name ? name : "No name found";
+	marker.location = location.formattedAdress ? location.formattedAdress : "No address found";
+	marker.categories = categories.length > 0 ? categories[0].name : "No categories found";
+	marker.phone = contact.phone ? contact.phone : "No phone number found";
+	marker.photo = bestPhoto ? `${bestPhoto.prefix}${bestPhoto.suffix}` : "No images found";
+
+	return marker;
+}
+
+export const createInfowindow = (marker) => {
+	marker.content = `<div id = "places-details">
+											<h3 class="place-name">${marker.name}</h3>
+											<p class="place-address">${marker.location}</p>
+											<p class="place-phone">${marker.phone}</p>
+											<div class="place-hours">
+											</div>
+											<a id = "website" href=${marker.url}>${marker.url}</a>
+											<img class= "place-img" src=${marker.photo}>
+									 </div>`
+
+}
+
+
+
 
 // function to populate the infowindow when marker is clicked.
 export const populateInfoWindow = (marker, infowindow, map) => {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import categories from '../data/categories.js';
 import { getFSvenues, getFSdetails, categoryName } from '../data/fsData.js';
+import {gatherContent, createInfowindow} from '../data/placesDetails.js';
 
 class PlacesList extends Component {
 
@@ -39,7 +40,7 @@ class PlacesList extends Component {
 
   // create markers
   createMarkers(realVenues) {
-    const {myMap, centerMap, } = this.props;
+    const {myMap, centerMap, infoWindow } = this.props;
     const {venues} = this.state;
     venues.map(venue => {
       // let position ={venue.location.lat, venue.location.lng};
@@ -63,11 +64,19 @@ class PlacesList extends Component {
           }, 2500);
         getFSdetails(marker.id)
           .then(data => {
-
+            gatherContent(marker, data);
+            createInfowindow(marker);
           })
+          .then(() => {
+            infoWindow.setContent(marker.content);
+            infoWindow.open(myMap, marker);
+          })
+          .catch(() => {
+            console.log("error creating infowindow");
+          });
       });
-
     });
+
   }
   // handleToggle(e) {
   //   const {listOpen} = this.props;
