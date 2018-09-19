@@ -84,7 +84,7 @@ class PlacesList extends Component {
   }
 
   filterByName = (event) => {
-    const {venues} = this.state;
+    const {venues, filteredList} = this.state;
     const {infoWindow} = this.props;
 
     //close any open infowindows
@@ -98,7 +98,6 @@ class PlacesList extends Component {
 
     //filter markers
     const filteredMarkers = venues.filter(venue => {
-      console.log(venue);
       const matches = venue.name.toLowerCase().indexOf(query) > -1;
       venue.marker.setVisibile(matches);
       return matches;
