@@ -42,7 +42,7 @@ class PlacesList extends Component {
 
   // create markers
   createMarkers(realVenues) {
-    const {myMap, centerMap, infoWindow } = this.props;
+    const {myMap, infoWindow } = this.props;
     const {venues} = this.state;
     venues.map(venue => {
       // let position ={venue.location.lat, venue.location.lng};
@@ -82,7 +82,7 @@ class PlacesList extends Component {
   }
 
   filterByName = (event) => {
-    const {venues, filteredList} = this.state;
+    const {venues} = this.state;
     const {infoWindow} = this.props;
 
     //close any open infowindows
@@ -107,10 +107,13 @@ class PlacesList extends Component {
     );
   };
 
+  openInfowindow = (venue) => {
+    window.google.maps.event.trigger(venue.marker, "click");
+  }
+
 
   render() {
-    const {listOpen, showFiltered } = this.props;
-    const { venues, filteredList } = this.state;
+    const { filteredList } = this.state;
     console.log(filteredList);
 
     return(
@@ -131,8 +134,9 @@ class PlacesList extends Component {
               onChange={this.filterByName}/>
 
           <ul className="placesList">
-                {venues.map(venue => (
-                  <li key={venue.id}>
+                {filteredList.map(venue => (
+                  <li key={venue.id}
+                      onClick={this.openInfowindow}>
                     {venue.name}
                     </li>
                 ))}

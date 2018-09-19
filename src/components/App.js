@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { mapStyle } from '../data/mapStyle.js';
 // import  locations  from '../data/locations.js';
-import { getFSvenues, realVenues} from '../data/fsData.js';
+// import { getFSvenues, realVenues} from '../data/fsData.js';
 import scriptLoader from 'react-async-script-loader';
 import PlacesList from './PlacesList.js';
-import InfoWindow from './InfoWindow.js';
+// import InfoWindow from './InfoWindow.js';
 
 class App extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class App extends Component {
 
    componentDidUpdate({ isScriptLoadSucceed }) {
     // const { isScriptLoaded, isScriptLoadSucceed } = this.props
-    const { marker, infoWindow, myMap, centerMap, mapIsReady, mapError, venues } = this.state;
+    const { centerMap, mapError } = this.state;
 
     if (isScriptLoadSucceed && !this.state.mapIsReady) {
       let map = new window.google.maps.Map(document.getElementById('map'), {
@@ -89,10 +89,6 @@ class App extends Component {
         </section>
 
         <section id="map">
-          <InfoWindow
-            listOpen = {listOpen}
-            infoWindow={infoWindow}
-            infowindowOpen={infowindowOpen}/>
         </section>
       </div>
     );
