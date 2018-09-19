@@ -97,13 +97,18 @@ class PlacesList extends Component {
     this.setState({query: query});
 
     //filter markers
-    const filterMarkers = venues.filter(venue => {
+    const filteredMarkers = venues.filter(venue => {
       console.log(venue);
       const matches = venue.name.toLowerCase().indexOf(query) > -1;
       venue.marker.setVisibile(matches);
       return matches;
-    })
-  }
+    });
+
+    this.setState(
+      { filteredList: filteredMarkers }
+    );
+  };
+
 
   render() {
     const {listOpen, showFiltered } = this.props;
