@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import categories from '../data/categories.js';
 import { getFSvenues, getFSdetails, categoryName } from '../data/fsData.js';
 import {gatherContent, createInfowindow} from '../data/placesDetails.js';
 
@@ -21,16 +20,21 @@ class PlacesList extends Component {
     super(props);
     this.state = {
       venues: [],
+      filteredList: [],
+      query: ""
     };
     // this.handleToggle = this.handleToggle.bind(this);
     // this.handleCategories = this.handleCategories.bind(this);
   }
 
+
+
   componentDidMount() {
     getFSvenues(this.props.centerMap)
     .then(realVenues => {
       this.setState({
-        venues:realVenues
+        venues:realVenues,
+        filteredList: realVenues
       });
       if(realVenues) {
         this.createMarkers(realVenues);
@@ -78,23 +82,32 @@ class PlacesList extends Component {
     });
 
   }
-  // handleToggle(e) {
-  //   const {listOpen} = this.props;
-  //   const togglingList = e.targer.value;
-  //   this.props.onToggleList();
-  //   console.log('list open:' );
-  // }
 
-  // handleCategories(e) {
-  //
-  //   this.props.filterCategories();
-  // }
+  filterByName = (event) => {
+    const {venues} = this.state;
+    const {infoWindow} = this.props;
+
+    //close any open infowindows
+    infoWindow.close();
+
+    //gather query entered into input
+    const query = event.target.value.toLowerCase();
+
+    //update query state with input
+    this.setState({query: query});
+
+    //filter markers
+    const filterMarkers = venues.filter(venue => {
+      console.log(venue);
+      const matches = venue.name.toLowerCase().indexOf(query) > -1;
+      venue.marker.setVisibile(matches);
+      return matches;
+    })
+  }
 
   render() {
     const {listOpen, showFiltered } = this.props;
     const { venues } = this.state;
-
-      console.log({venues});
 
     return(
       <div>
@@ -110,14 +123,17 @@ class PlacesList extends Component {
         <input id="filter-places"
               data-bind="textInput: filter"
               type="text"
-              placeholder="Filter locations by name..."/>
-        <ul className="placesList">
-              {venues.map(venue => (
-                <li key={venue.id}>
-                  {venue.name}
-                  </li>
-              ))}
-        </ul>
+              placeholder="Filter locations by name..."
+              onChange={this.filterByName}/>
+
+          <ul className="placesList">
+                {venues.map(venue => (
+                  <li key={venue.id}>
+                    {venue.name}
+                    </li>
+                ))}
+          </ul>
+
       </div>
     );
   }

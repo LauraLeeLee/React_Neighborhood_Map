@@ -33,18 +33,36 @@ h1 {
 }
 
 #listSection {
+  grid-template-columns: 1;
+  grid-template-rows: 1;
   height: 100vh;
   grid-row-start: 2;
   grid-column-start: 1;
   grid-template-rows: 3;
 }
 
+/* #places-section {
+  grid-row-start: 1;
+  grid-column: 1;
+  margin-top: 10px;
+  background-color: #fff7e6;
+  height: 60vh;
+  z-index: 10;
+  position: absolute;
+  left: 15px;
+  float: left;
+  border: 2px solid #009933;
+  overflow: scroll;
+  transition: 1s;
+  text-align: center;
+} */
+
 .placesList {
   list-style-type: none;
+  /* width: 170px; */
   color: var(--main-font);
   margin-top: 20px;
   text-align: left;
-  grid-row-start: 3;
 }
 
 .placesList li {
@@ -90,25 +108,28 @@ h1 {
   color: #d9d9d9;
 }
 
-#places-details {
+.infowindow {
   /* width: 300px;
   height: 200px; */
   overflow: auto;
   text-align: center;
-  color: #006622;
   margin: 0 auto 10px;
-  background-color: #c6ecd9;
+  /* background-color: #c6ecd9; */
   border-radius: 10px;
 }
 
+.places-details {
+  color: #006622;
+}
+
  .place-name {
-  background-color: #fff7e6;
-  height: 30px;
+  /* background-color: #fff7e6; */
+  height: 40px;
   font-size: 1.4em;
   text-align: center;
   border-bottom: 7px double #006622;
   border-radius: 10px;
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   z-index: 10;
 }

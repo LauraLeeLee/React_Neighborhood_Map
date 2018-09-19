@@ -72,7 +72,7 @@ class App extends Component {
             {listOpen ? 'Hide List' : 'Show List'}
         </h5>
         <section id="listSection"
-                 className={ listOpen ? "list-show" : "list-hide"} >
+                            className={ listOpen ? "list-show" : "list-hide"}>
           { mapIsReady ? (
           <PlacesList
             listOpen = {listOpen}

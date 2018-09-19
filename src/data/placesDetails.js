@@ -6,27 +6,27 @@ export const gatherContent = (marker, data) => {
 	const {canonicalUrl, description, location, name, bestPhoto, contact, categories} = locale;
 
 	marker.url = canonicalUrl ? canonicalUrl : "No web address found";
-	marker.description = description ? description : "No description found";
+	marker.description = description ? description : "";
 	marker.name = name ? name : "No name found";
 	marker.location = location.formattedAddress ? location.formattedAddress : "No address found";
 	marker.categories = categories.length > 0 ? categories[0].name : "No categories found";
-	marker.phone = contact.phone ? contact.phone : "No phone number found";
-	marker.photo = bestPhoto ? `${bestPhoto.prefix}200x200${bestPhoto.suffix}` : "No images found";
+	marker.phone = contact.phone ? contact.phone : "";
+	marker.photo = bestPhoto ? `${bestPhoto.prefix}125x125${bestPhoto.suffix}` : "No images found";
 
 	return marker;
 }
 
 export const createInfowindow = (marker) => {
-	marker.content = `<div id = "places-details">
-											<h3 class="place-name">${marker.name}</h3>
-											<p class="place-address">${marker.location}</p>
-											<p class="place-phone">${marker.phone}</p>
-											<p class="place-description">${marker.description}</p>
-											<div class="place-hours">
-											</div>
-											<a id="website" href=${marker.url}  target="_blank">${marker.url}</a>
+	marker.content = `<div class="infowindow">
 											<img class= "place-img" src=${marker.photo}>
-									 </div>`
+											<div class="places-details">
+												<h3 class="place-name">${marker.name}</h3>
+												<p class="place-address">${marker.location}</p>
+												<p class="place-phone">${marker.phone}</p>
+												<p class="place-description">${marker.description}</p>
+												<a id="website" href=${marker.url}  target="_blank">${marker.url}</a>
+									 		</div>
+										</div>`
 
 }
 
