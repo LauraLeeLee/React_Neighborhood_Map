@@ -5,7 +5,6 @@ import { getFSvenues, realVenues} from '../data/fsData.js';
 import scriptLoader from 'react-async-script-loader';
 import PlacesList from './PlacesList.js';
 import InfoWindow from './InfoWindow.js';
-import {populateInfoWindow, getPlacesDetails} from '../data/placesDetails.js';
 
 class App extends Component {
   constructor(props) {
@@ -62,7 +61,7 @@ class App extends Component {
 
   render() {
         console.log(this.state);
-    const { listOpen, infowindowOpen, infoWindow, myMap, showFiltered, centerMap } = this.state;
+    const { listOpen, infowindowOpen, infoWindow, myMap, showFiltered, centerMap, mapIsReady } = this.state;
 
     return (
       <div className="container">
@@ -74,6 +73,7 @@ class App extends Component {
         </h5>
         <section id="listSection"
                  className={ listOpen ? "list-show" : "list-hide"} >
+          { mapIsReady ? (
           <PlacesList
             listOpen = {listOpen}
             infoWindow={infoWindow}
@@ -83,6 +83,9 @@ class App extends Component {
             showFiltered={showFiltered}
             filterByName={this.filterByName}
             filterCategories={this.filterCategories}/>
+          ) : (
+            <p>Technical difficulties, please try again</p>
+          )}
         </section>
 
         <section id="map">

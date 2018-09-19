@@ -1,17 +1,17 @@
 //create content and fallback
 
 export const gatherContent = (marker, data) => {
-	const locale = data.response.venue;
+	const locale = data.venue;
 
-	const {canonicaUrl, description, location, name, bestPhoto, contact, categories} = locale;
+	const {canonicalUrl, description, location, name, bestPhoto, contact, categories} = locale;
 
-	marker.url = canonicaUrl ? canonicaUrl : "No webaddress found";
+	marker.url = canonicalUrl ? canonicalUrl : "No web address found";
 	marker.description = description ? description : "No description found";
 	marker.name = name ? name : "No name found";
-	marker.location = location.formattedAdress ? location.formattedAdress : "No address found";
+	marker.location = location.formattedAddress ? location.formattedAddress : "No address found";
 	marker.categories = categories.length > 0 ? categories[0].name : "No categories found";
 	marker.phone = contact.phone ? contact.phone : "No phone number found";
-	marker.photo = bestPhoto ? `${bestPhoto.prefix}${bestPhoto.suffix}` : "No images found";
+	marker.photo = bestPhoto ? `${bestPhoto.prefix}200x200${bestPhoto.suffix}` : "No images found";
 
 	return marker;
 }
