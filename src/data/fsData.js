@@ -57,8 +57,7 @@ export const getFSdetails = (fsid) => {
       }
   })
   .then(data => {
-    const details = data.response;
-    console.log(details);
-    return details;
+    console.log(data.response);
+    return data.response;
   });
 };
