@@ -91,8 +91,8 @@ h1 {
 }
 
 #places-details {
-  width: 300px;
-  height: 200px;
+  /* width: 300px;
+  height: 200px; */
   overflow: auto;
   text-align: center;
   color: #006622;
