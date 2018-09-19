@@ -27,8 +27,6 @@ class PlacesList extends Component {
     // this.handleCategories = this.handleCategories.bind(this);
   }
 
-
-
   componentDidMount() {
     getFSvenues(this.props.centerMap)
     .then(realVenues => {
@@ -99,7 +97,8 @@ class PlacesList extends Component {
     //filter markers
     const filteredMarkers = venues.filter(venue => {
       const matches = venue.name.toLowerCase().indexOf(query) > -1;
-      venue.marker.setVisibile(matches);
+      venue.marker.setVisible(matches);
+      console.log(matches);
       return matches;
     });
 
@@ -111,7 +110,8 @@ class PlacesList extends Component {
 
   render() {
     const {listOpen, showFiltered } = this.props;
-    const { venues } = this.state;
+    const { venues, filteredList } = this.state;
+    console.log(filteredList);
 
     return(
       <div>
