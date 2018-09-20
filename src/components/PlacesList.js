@@ -11,7 +11,6 @@ class PlacesList extends Component {
     // infowindowOpen: PropTypes.bool.isRequired,
     myMap: PropTypes.object.isRequired,
     centerMap: PropTypes.object.isRequired,
-    // filterByName: PropTypes.func.isRequired,
     // filterCategories: PropTypes.func.isRequired,
     showFiltered: PropTypes.bool.isRequired
   }
@@ -21,10 +20,12 @@ class PlacesList extends Component {
     this.state = {
       venues: [],
       filteredList: [],
-      query: ""
+      query: "",
+      categories: []
     };
     // this.handleToggle = this.handleToggle.bind(this);
     // this.handleCategories = this.handleCategories.bind(this);
+    // this.openInfowindow =this.openInfowindow .bind(this);
   }
 
   componentDidMount() {
@@ -65,7 +66,7 @@ class PlacesList extends Component {
             marker.setAnimation(null);
           }, 2500);
 
-        //gets fs details for marker venue on marker click   
+        //gets fs details for marker venue on marker click
         getFSdetails(marker.id)
           .then(data => {
             gatherContent(marker, data);
@@ -80,9 +81,9 @@ class PlacesList extends Component {
           });
       });
     });
-
   }
 
+  //filters list from input entry
   filterByName = (event) => {
     const {venues} = this.state;
     const {infoWindow} = this.props;
@@ -109,13 +110,33 @@ class PlacesList extends Component {
     );
   };
 
-  openInfowindow = (venue, marker) => {
+  filterByCategory = (filterObj) => {
+    const {venues, categories} = this.state;
+    const {infoWindow} = this.props;
+
+    //close any open infowindows
+    infoWindow.close();
+
+    //filter markers
+    const filteredCategories = venues.filter(venue => {
+      const matches = venue.categories.name == filterObj ;
+      venue.marker.setVisible(matches);
+      console.log(matches);
+      return matches;
+    });
+
+    this.setState(
+      { filteredList: filteredCategories }
+    );
+  }
+
+  //open infowindow when a venue in list is clicked
+  openInfowindow = (venue) => {
     window.google.maps.event.trigger(venue.marker, "click");
     console.log("openInfowindow triggered");
     console.log(venue.marker);
     console.log(venue.name);
   }
-
 
   render() {
     const { filteredList } = this.state;
@@ -126,7 +147,7 @@ class PlacesList extends Component {
         <ul className="categories">
           {categoryName.map(name => (
             <li key={name}
-                onClick={this.handleCategories}
+                onClick={this.filterByCategory}
                >
               {name}
             </li>
