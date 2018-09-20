@@ -46,7 +46,7 @@ class App extends Component {
         });
 
         //create infowindows
-        const infowindow = new window.google.maps.InfoWindow({maxWidth: 200});
+        const infowindow = new window.google.maps.InfoWindow({maxWidth: 300});
 
         this.setState({
           myMap: map,
@@ -61,7 +61,7 @@ class App extends Component {
 
   render() {
         console.log(this.state);
-    const { listOpen, infowindowOpen, infoWindow, myMap, showFiltered, centerMap, mapIsReady } = this.state;
+    const { listOpen, infowindowOpen, infoWindow, myMap, showFiltered, centerMap, mapIsReady, mapError } = this.state;
 
     return (
       <div className="container">
@@ -89,6 +89,15 @@ class App extends Component {
         </section>
 
         <section id="map">
+          {mapError ? (
+            <div id="maperror">
+              Google Maps not loading, please try your request again
+            </div>
+          ) : (
+            <div className="mapload">
+            Map is Loading
+            </div>
+          )}
         </section>
       </div>
     );

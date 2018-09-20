@@ -44,9 +44,9 @@ class PlacesList extends Component {
   createMarkers(realVenues) {
     const {myMap, infoWindow } = this.props;
     const {venues} = this.state;
-    venues.map(venue => {
+    venues.map((venue, marker) => {
       // let position ={venue.location.lat, venue.location.lng};
-      let marker = new window.google.maps.Marker({
+      venue.marker = new window.google.maps.Marker({
     		map: myMap,
     		position: venue.location,
     		title: venue.name,
@@ -57,13 +57,15 @@ class PlacesList extends Component {
     	});
 
       //adds click to markers
-      marker.addListener('click', function() {
+      venue.marker.addListener('click', function() {
         const marker = this;
           //adds bounce to marker when clicked
-          marker.setAnimation(window.google.maps.Animation.BOUNCE);
+          venue.marker.setAnimation(window.google.maps.Animation.BOUNCE);
           setTimeout(function() {
             marker.setAnimation(null);
           }, 2500);
+
+        //gets fs details for marker venue on marker click   
         getFSdetails(marker.id)
           .then(data => {
             gatherContent(marker, data);
@@ -107,8 +109,11 @@ class PlacesList extends Component {
     );
   };
 
-  openInfowindow = (venue) => {
+  openInfowindow = (venue, marker) => {
     window.google.maps.event.trigger(venue.marker, "click");
+    console.log("openInfowindow triggered");
+    console.log(venue.marker);
+    console.log(venue.name);
   }
 
 
