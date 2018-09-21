@@ -111,24 +111,35 @@ class PlacesList extends Component {
   };
 
   filterByCategory = (filterObj) => {
-    const {venues, categories} = this.state;
+    const {venues, categories, } = this.state;
     const {infoWindow} = this.props;
 
     //close any open infowindows
     infoWindow.close();
 
     //filter markers
-    const filteredCategories = venues.filter(venue => {
-      const matches = venue.categories.name == filterObj ;
-      venue.marker.setVisible(matches);
-      console.log(matches);
-      return matches;
+    // const filteredCategories = venues.filter(venue => {
+    //   const matches = venue.categories.name == filterObj;
+    //   console.log(venue.categories.name);
+    //   venue.marker.setVisible(matches);
+    //   console.log(matches);
+    //   return matches;
+    // });
+// const categoryId=categories.map(value => value.value);
+    const filteredCategories = venues.map(venue => {
+      const venueCat = venue.categories;
+      const catName = venueCat.map(name => name.value);
+      console.log(catName);
+      const matches = catName == filterObj;
+              venue.marker.setVisible(matches);
+              console.log(matches);
+              return matches;
     });
 
     this.setState(
       { filteredList: filteredCategories }
     );
-  }
+  };
 
   //open infowindow when a venue in list is clicked
   openInfowindow = (venue) => {
