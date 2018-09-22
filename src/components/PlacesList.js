@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getFSvenues, getFSdetails, categoryName, getAllCats } from '../data/fsData.js';
+import { getFSvenues, getFSdetails, categoryName } from '../data/fsData.js';
 import {gatherContent, createInfowindow} from '../data/placesDetails.js';
 
 class PlacesList extends Component {
@@ -39,7 +39,7 @@ class PlacesList extends Component {
         this.createMarkers(realVenues);
       }
     });
-    getAllCats(getFSvenues);
+    // getAllCats(getFSvenues);
   }
 
   // create markers
@@ -121,6 +121,7 @@ class PlacesList extends Component {
     const filteredCategories = venues.filter(venue => {
       const venueCat = venue.categories;
       const catName = venueCat.map(cat => cat.name)[0];
+      console.log(catName);
       const matches = catName.toLowerCase().includes(filterObj.toLowerCase());
       venue.marker.setVisible(matches);
       return matches;
@@ -168,7 +169,7 @@ class PlacesList extends Component {
                     </li>
                 ))}
           </ul>
-
+          <div  className="fade-text"></div>
       </div>
     );
   }

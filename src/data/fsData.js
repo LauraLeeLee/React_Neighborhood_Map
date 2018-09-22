@@ -60,22 +60,22 @@ export const getFSdetails = (fsid) => {
   });
 };
 
-
-export const getAllCats = () => {
-  const catsUrl = `https://api.foursquare.com/v2/venues/categories?client_id=${clientId}&client_secret=${clientSecret}&v=${versDate}`
-
-  return fetch(catsUrl)
-    .then(response => {
-      if(!response.ok) {
-        console.log("error retrieving categories");
-      } else {
-        return response.json();
-      }
-    })
-    .then(data => {
-      console.log(data);
-      // const categories = data.response.categories;
-      // const catName = categories.map(cat => cat.name)[0];
-      // console.log(catName);
-    });
-}
+// export const getAllCats = (fsid) => {
+//   const fourSqId = fsid;
+//   const catsUrl = `https://api.foursquare.com/v2/venues/categories?${fourSqId}client_id=${clientId}&client_secret=${clientSecret}&v=${versDate}`
+//
+//   return fetch(catsUrl)
+//     .then(response => {
+//       if(!response.ok) {
+//         console.log("error retrieving categories");
+//       } else {
+//         return response.json();
+//       }
+//     })
+//     .then(data => {
+//       console.log(data);
+//       // const categories = data.response.categories;
+//       // const catName = categories.map(cat => cat.name)[0];
+//       // console.log(catName);
+//     });
+// }

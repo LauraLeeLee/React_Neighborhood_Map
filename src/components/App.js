@@ -65,7 +65,8 @@ class App extends Component {
 
     return (
       <div className="container">
-        <h1>Neighborhood Map</h1>
+        <h1>Florence Italy POI</h1>
+        <h2>Results powered by Foursquare</h2>
         <h5
           className="toggle-list"
           onClick={this.toggleList}>

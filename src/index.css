@@ -22,7 +22,13 @@ h1 {
   grid-column: 1 / span 2;
   font-weight: 700;
   color: var(--main-font);
+}
 
+h2 {
+  grid-row-start:1;
+  grid-column: 1/ span 2;
+  color: var(--main-font);
+  font-size: 10px;
 }
 
 #map {
@@ -39,6 +45,25 @@ h1 {
   grid-row-start: 2;
   grid-column-start: 1;
   grid-template-rows: 3;
+  /* width: 20vw; */
+  height: 60vh;
+  /* z-index: 10; */
+  /* position: absolute; */
+  left: 15px;
+  /* float: left; */
+  border: 2px solid #009933;
+  overflow: scroll;
+  transition: 1s;
+}
+
+/*fades text at bottom of places section*/
+.fade-text {
+  height: 50px;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-image: linear-gradient(to bottom, transparent, #fff7e6);
 }
 
 /* #places-section {
