@@ -101,10 +101,9 @@ class PlacesList extends Component {
     const filteredMarkers = venues.filter(venue => {
       const matches = venue.name.toLowerCase().indexOf(query) > -1;
       venue.marker.setVisible(matches);
-      console.log(matches);
       return matches;
     });
-
+    console.log(filteredMarkers);
     this.setState(
       { filteredList: filteredMarkers }
     );
@@ -118,24 +117,15 @@ class PlacesList extends Component {
     infoWindow.close();
 
     //filter markers
-    // const filteredCategories = venues.filter(venue => {
-    //   const matches = venue.categories.name == filterObj;
-    //   console.log(venue.categories.name);
-    //   venue.marker.setVisible(matches);
-    //   console.log(matches);
-    //   return matches;
-    // });
-// const categoryId=categories.map(value => value.value);
-    const filteredCategories = venues.map(venue => {
+    const filteredCategories = venues.filter(venue => {
       const venueCat = venue.categories;
-      const catName = venueCat.map(name => name.value);
-      console.log(catName);
-      const matches = catName == filterObj;
-              venue.marker.setVisible(matches);
-              console.log(matches);
-              return matches;
+      const catName = venueCat.map(cat => cat.name)[0];
+      const matches = catName.toLowerCase().includes(filterObj.toLowerCase());
+      venue.marker.setVisible(matches);
+      return matches;
     });
-
+    console.log(filterObj);
+    console.log(filteredCategories);
     this.setState(
       { filteredList: filteredCategories }
     );
@@ -158,8 +148,7 @@ class PlacesList extends Component {
         <ul className="categories">
           {categoryName.map(name => (
             <li key={name}
-                onClick={this.filterByCategory}
-               >
+                onClick={() => this.filterByCategory(name)}>
               {name}
             </li>
           ))}
@@ -173,7 +162,7 @@ class PlacesList extends Component {
           <ul className="placesList">
                 {filteredList.map(venue => (
                   <li key={venue.id}
-                      onClick={this.openInfowindow}>
+                      onClick={() => this.openInfowindow(venue)}>
                     {venue.name}
                     </li>
                 ))}
