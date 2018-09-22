@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getFSvenues, getFSdetails, categoryName } from '../data/fsData.js';
+import { getFSvenues, getFSdetails, categoryName, getAllCats } from '../data/fsData.js';
 import {gatherContent, createInfowindow} from '../data/placesDetails.js';
 
 class PlacesList extends Component {
@@ -39,6 +39,7 @@ class PlacesList extends Component {
         this.createMarkers(realVenues);
       }
     });
+    getAllCats(getFSvenues);
   }
 
   // create markers
