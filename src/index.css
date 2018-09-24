@@ -1,6 +1,7 @@
 :root {
-  --main-color: #ffffcc;;
-  --main-font: #0000cc;
+  --main-color: #FBCD61;
+  --main-font: #406647;
+  --list-section: #fde7b4;
 }
 body {
   margin: 0;
@@ -21,8 +22,9 @@ h1 {
   grid-row-start: 1;
   grid-column: 1 / span 2;
   font-weight: 700;
+  font-size: 3em;
   color: var(--main-font);
-  margin: 0;
+  margin: 25px 0 0 0;
 }
 
 h2 {
@@ -38,23 +40,25 @@ h2 {
   grid-row-start: 3;
   grid-column-start: 2;
   margin-top: 0;
+  border-top: 2px solid var(--main-font);
 
 }
 
 #listSection {
-  grid-template-columns: 1;
-  grid-template-rows: 1;
+  /* grid-template-columns: 1;
+  grid-template-rows: 1; */
   height: 100vh;
   grid-row-start: 3;
   grid-column-start: 1;
-  grid-template-rows: 3;
+  background-color: var(--list-section);
+  /* grid-template-rows: 3; */
   /* width: 20vw; */
   /* height: 60vh; */
   /* z-index: 10; */
   /* position: absolute; */
   left: 15px;
   /* float: left; */
-  border: 2px solid #009933;
+  border: 2px solid var(--main-font);
   overflow: scroll;
   transition: 1s;
   margin-top: 0;
@@ -67,7 +71,7 @@ h2 {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-image: linear-gradient(to bottom, transparent, #fff7e6);
+  background-image: linear-gradient(to bottom, transparent, #fde7b4);
 }
 
 /* #places-section {
@@ -114,13 +118,14 @@ h2 {
 }
 
 .categories {
-  grid-row-start: 1;
+  /* grid-row-start: 1;
+  grid-column-start: 1; */
 }
 
 .categories li {
   list-style-type: none;
-  background-color: #009933;
-  color: #fff;
+  background-color: var(--main-font);
+  color: #e3deb5;
   display: inline-block;
   border-radius: 3px;
   padding: 5px;
@@ -137,6 +142,7 @@ h2 {
   color: #d9d9d9;
 }
 
+/* infowindow styling */
 .infowindow {
   /* width: 300px;
   height: 200px; */
