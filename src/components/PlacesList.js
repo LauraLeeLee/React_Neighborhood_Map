@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getFSvenues, getFSdetails, categoryName } from '../data/fsData.js';
+import { getFSvenues, getFSdetails, categoryName, poiNames } from '../data/fsData.js';
 import {gatherContent, createInfowindow} from '../data/placesDetails.js';
+import categories from '../data/categories.js'
 
 class PlacesList extends Component {
 
@@ -120,7 +121,12 @@ class PlacesList extends Component {
     //filter markers
     const filteredCategories = venues.filter(venue => {
       const venueCat = venue.categories;
-      const catName = venueCat.map(cat => cat.name)[0];
+      console.log(venue.categories);
+      let catName = venueCat.map(cat => cat.name)[0];
+      // catName = catName === 'History Museum' ? 'Museum' :catName ;
+      // a = condition1 ? 1 : condition2 ? 2 : condition3 ? 3 : null;
+      // catName = catName == 'History Museum' ? 'Museum' : 'Church' ? 'Church' : 'Plaza' ? 'Plaza' : 'Outdoor Sculputre' ? 'Other POI' : 'Monument/Landmark' ? 'Other POI' : 'Historic Site' ? 'Other POI' : 'City Hall' ? 'Other POI' : 'Bridge' ? 'Other POI' : 'Scenic Lookout' ? 'Other POI' : 'Garden' ? 'Other POI' : catName;
+
       console.log(catName);
       const matches = catName.toLowerCase().includes(filterObj.toLowerCase());
       venue.marker.setVisible(matches);
@@ -137,8 +143,6 @@ class PlacesList extends Component {
   openInfowindow = (venue) => {
     window.google.maps.event.trigger(venue.marker, "click");
     console.log("openInfowindow triggered");
-    console.log(venue.marker);
-    console.log(venue.name);
   }
 
   render() {
@@ -148,7 +152,7 @@ class PlacesList extends Component {
     return(
       <div>
         <ul className="categories">
-          {categoryName.map(name => (
+          {categories.map(name => (
             <li key={name}
                 onClick={() => this.filterByCategory(name)}>
               {name}

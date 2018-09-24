@@ -1,7 +1,7 @@
-import { categories } from '../data/fsData.js';
+// import { categories } from '../data/fsData.js';
 
 const categories = [
-  "City", "POI", "Food", "Shop", "Hotel", "Churches"
+  "Museum", "Church", "Plaza", "Other POI",
 ]
 
 export default categories
