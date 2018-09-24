@@ -121,8 +121,9 @@ class PlacesList extends Component {
     //filter markers
     const filteredCategories = venues.filter(venue => {
       const venueCat = venue.categories;
-      console.log(venue.categories);
+      // console.log(venue.categories);
       let catName = venueCat.map(cat => cat.name)[0];
+      // let catName = venueCat.map(cat => Object.values(venueCat));
       // catName = catName === 'History Museum' ? 'Museum' :catName ;
       // a = condition1 ? 1 : condition2 ? 2 : condition3 ? 3 : null;
       // catName = catName == 'History Museum' ? 'Museum' : 'Church' ? 'Church' : 'Plaza' ? 'Plaza' : 'Outdoor Sculputre' ? 'Other POI' : 'Monument/Landmark' ? 'Other POI' : 'Historic Site' ? 'Other POI' : 'City Hall' ? 'Other POI' : 'Bridge' ? 'Other POI' : 'Scenic Lookout' ? 'Other POI' : 'Garden' ? 'Other POI' : catName;
