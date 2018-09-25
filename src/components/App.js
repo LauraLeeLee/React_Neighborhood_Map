@@ -64,7 +64,7 @@ class App extends Component {
     const { listOpen, infowindowOpen, infoWindow, myMap, showFiltered, centerMap, mapIsReady, mapError } = this.state;
 
     return (
-      <div className="container">
+      <div id="container">
         <h1>Florence Italy POI</h1>
         <h2>Results powered by Foursquare</h2>
         <h5
@@ -82,6 +82,7 @@ class App extends Component {
             myMap={myMap}
             centerMap={centerMap}
             showFiltered={showFiltered}
+            toggleList={this.toggleList}
             filterByName={this.filterByName}
             filterCategories={this.filterCategories}/>
           ) : (

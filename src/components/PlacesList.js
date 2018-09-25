@@ -12,7 +12,7 @@ class PlacesList extends Component {
     // infowindowOpen: PropTypes.bool.isRequired,
     myMap: PropTypes.object.isRequired,
     centerMap: PropTypes.object.isRequired,
-    // filterCategories: PropTypes.func.isRequired,
+    toggleList: PropTypes.func.isRequired,
     showFiltered: PropTypes.bool.isRequired
   }
 
@@ -45,7 +45,7 @@ class PlacesList extends Component {
 
   // create markers
   createMarkers(realVenues) {
-    const {myMap, infoWindow } = this.props;
+    const {myMap, infoWindow, listOpen, toggleList } = this.props;
     const {venues} = this.state;
     venues.map((venue, marker) => {
       // let position ={venue.location.lat, venue.location.lng};
@@ -81,6 +81,9 @@ class PlacesList extends Component {
           .catch(() => {
             console.log("error creating infowindow");
           });
+          if (listOpen) {
+             toggleList();
+           }
       });
     });
   }
@@ -142,6 +145,7 @@ class PlacesList extends Component {
 
   //open infowindow when a venue in list is clicked
   openInfowindow = (venue) => {
+    const {toggleList, listOpen} = this.props;
     window.google.maps.event.trigger(venue.marker, "click");
     console.log("openInfowindow triggered");
   }
