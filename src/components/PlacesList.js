@@ -45,7 +45,7 @@ class PlacesList extends Component {
 
   // create markers
   createMarkers(realVenues) {
-    const {myMap, infoWindow, listOpen, toggleList } = this.props;
+    const {myMap, infoWindow, listOpen, toggleList, infowindowOpen } = this.props;
     const {venues} = this.state;
     venues.map((venue, marker) => {
       // let position ={venue.location.lat, venue.location.lng};
@@ -114,6 +114,7 @@ class PlacesList extends Component {
     );
   };
 
+  //filter list by category selected
   filterByCategory = (filterObj) => {
     const {venues, categories, } = this.state;
     const {infoWindow} = this.props;
@@ -121,16 +122,17 @@ class PlacesList extends Component {
     //close any open infowindows
     infoWindow.close();
 
-    //filter markers
+    //filter markers as per category
     const filteredCategories = venues.filter(venue => {
       const venueCat = venue.categories;
       console.log(venue.categories);
+
       let catName = venueCat.map(cat => cat.name)[0];
-      // catName =  catName == 'Outdoor Sculputre' ? 'Other POI' : 'Monument/Landmark' ? 'Other POI' : 'Historic Site' ? 'Other POI' : 'City Hall' ? 'Other POI' : 'Bridge' ? 'Other POI' : 'Scenic Lookout' ? 'Other POI' : 'Garden' ? 'Other POI' : catName;
+
+      // catName =  catName == 'Outdoor Sculpture' ? 'Other POI' : 'Monument/Landmark' ? 'Other POI' : 'Historic Site' ? 'Other POI' : 'City Hall' ? 'Other POI' : 'Bridge' ? 'Other POI' : 'Scenic Lookout' ? 'Other POI' : 'Garden' ? 'Other POI' : catName;
       // catName = catName === 'History Museum' ? 'Museum' :catName ;
       // a = condition1 ? 1 : condition2 ? 2 : condition3 ? 3 : null;
       // catName = catName == 'History Museum' ? 'Museum' : 'Church' ? 'Church' : 'Plaza' ? 'Plaza' : 'Outdoor Sculputre' ? 'Other POI' : 'Monument/Landmark' ? 'Other POI' : 'Historic Site' ? 'Other POI' : 'City Hall' ? 'Other POI' : 'Bridge' ? 'Other POI' : 'Scenic Lookout' ? 'Other POI' : 'Garden' ? 'Other POI' : catName;
-
       console.log(catName);
       const matches = catName.toLowerCase().includes(filterObj.toLowerCase());
       venue.marker.setVisible(matches);
@@ -143,6 +145,14 @@ class PlacesList extends Component {
     );
   };
 
+  // const allCategories = venues.map(venue => {
+  //   const venueCat = venue.categories;
+  //   console.log(venue.categories);
+  //
+  //   let allCatNames = venueCat.map(cat => cat.name)[0];
+  //   console.log(allCatNames);
+  // });
+
   //open infowindow when a venue in list is clicked
   openInfowindow = (venue) => {
     const {toggleList, listOpen} = this.props;
@@ -152,6 +162,7 @@ class PlacesList extends Component {
 
   render() {
     const { filteredList } = this.state;
+    const { listOpen } = this.props;
     console.log(filteredList);
 
     return(
@@ -159,21 +170,29 @@ class PlacesList extends Component {
         <ul className="categories">
           {categories.map(name => (
             <li key={name}
-                onClick={() => this.filterByCategory(name)}>
+                role="button"
+                tabIndex={listOpen ? "0" : "-1"}
+                onClick={() => this.filterByCategory(name)}
+                onKeyPress={() => this.filterByCategory(name)}>
               {name}
             </li>
           ))}
         </ul>
         <input id="filter-places"
-              data-bind="textInput: filter"
               type="text"
+              role="search"
+              tabIndex={listOpen ? "0" : "-1"}
+              data-bind="textInput: filter"
               placeholder="Filter locations by name..."
               onChange={this.filterByName}/>
 
           <ul className="placesList">
                 {filteredList.map(venue => (
                   <li key={venue.id}
-                      onClick={() => this.openInfowindow(venue)}>
+                      role="button"
+                      tabIndex={listOpen ? "0" : "-1"}
+                      onClick={() => this.openInfowindow(venue)}
+                      onKeyPress={() => this.openInfowindow(venue)}>
                     {venue.name}
                     </li>
                 ))}

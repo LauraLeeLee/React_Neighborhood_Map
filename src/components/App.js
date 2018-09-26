@@ -28,7 +28,13 @@ class App extends Component {
   }
 
   toggleList = () => {
-    const { listOpen } = this.state;
+    const { listOpen, infoWindow, infowindowOpen } = this.state;
+    if (!listOpen) {
+        infoWindow.close();
+      }
+      // if(!infowindowOpen){
+      //   this.setState({listOpen: false});
+      // }
     this.setState({listOpen: !listOpen});
   }
 
@@ -64,16 +70,18 @@ class App extends Component {
     const { listOpen, infowindowOpen, infoWindow, myMap, showFiltered, centerMap, mapIsReady, mapError } = this.state;
 
     return (
-      <div id="container">
-        <h1>Florence Italy POI</h1>
-        <h2>Results powered by Foursquare</h2>
+      <div id="container" role="main">
+        <h1 tabIndex="0">Florence Italy POI</h1>
+        <h2 tabIndex="0">Results powered by Foursquare</h2>
         <h5
           className="toggle-list"
+          tabIndex="0"
           onClick={this.toggleList}>
             {listOpen ? 'Hide List' : 'Show List'}
         </h5>
         <section id="listSection"
-                            className={ listOpen ? "list-show" : "list-hide"}>
+                  tabIndex={ listOpen ? "0" : "-1"}
+                  className={ listOpen ? "list-show" : "list-hide"}>
           { mapIsReady ? (
           <PlacesList
             listOpen = {listOpen}
