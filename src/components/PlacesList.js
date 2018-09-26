@@ -145,13 +145,21 @@ class PlacesList extends Component {
     );
   };
 
-  // const allCategories = venues.map(venue => {
+  // const allCategories =  venues.map(venue => {
   //   const venueCat = venue.categories;
   //   console.log(venue.categories);
   //
   //   let allCatNames = venueCat.map(cat => cat.name)[0];
   //   console.log(allCatNames);
   // });
+
+   getCatNames = () => {
+    const {venues, categories, } = this.state;
+    const venueCatArray = venues.map( venue => venue.categories);
+    console.log(venueCatArray);
+    const catNameArray = venueCatArray.map(item => item.value);
+  console.log(catNameArray);
+}
 
   //open infowindow when a venue in list is clicked
   openInfowindow = (venue) => {
@@ -164,6 +172,7 @@ class PlacesList extends Component {
     const { filteredList } = this.state;
     const { listOpen } = this.props;
     console.log(filteredList);
+    this.getCatNames();
 
     return(
       <div>
@@ -186,10 +195,10 @@ class PlacesList extends Component {
               placeholder="Filter locations by name..."
               onChange={this.filterByName}/>
 
-          <ul className="placesList">
+          <ul className="placesList" role="listbox">
                 {filteredList.map(venue => (
                   <li key={venue.id}
-                      role="button"
+                      role="option"
                       tabIndex={listOpen ? "0" : "-1"}
                       onClick={() => this.openInfowindow(venue)}
                       onKeyPress={() => this.openInfowindow(venue)}>

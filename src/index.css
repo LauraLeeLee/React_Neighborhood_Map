@@ -47,8 +47,8 @@ h2 {
 }
 
 #listSection {
-  /* height: 100vh; */
   width: 30vw;
+  height: 100vh;
   z-index: 5;
   grid-row-start: 3;
   grid-column-start: 1;
