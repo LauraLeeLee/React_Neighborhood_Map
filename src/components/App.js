@@ -4,6 +4,7 @@ import { mapStyle } from '../data/mapStyle.js';
 // import { getFSvenues, realVenues} from '../data/fsData.js';
 import scriptLoader from 'react-async-script-loader';
 import PlacesList from './PlacesList.js';
+import menu from '../images/menu.png';
 // import InfoWindow from './InfoWindow.js';
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
       mapIsReady: false,
       mapError: false,
       showFiltered: true,
+      screenWidth: window.innerWidth
     }
     this.toggleList = this.toggleList.bind(this);
     // this.filterByName = this.filterByName.bind(this);
@@ -28,14 +30,20 @@ class App extends Component {
   }
 
   toggleList = () => {
-    const { listOpen, infoWindow, infowindowOpen } = this.state;
-    if (!listOpen) {
-        infoWindow.close();
+    const { listOpen, infoWindow, infowindowOpen, screenWidth } = this.state;
+    if(screenWidth < 800) {
+      if (!listOpen) {
+          infoWindow.close();
+        }
+      this.setState({listOpen: !listOpen});
       }
-      // if(!infowindowOpen){
-      //   this.setState({listOpen: false});
-      // }
-    this.setState({listOpen: !listOpen});
+  }
+
+  checkListOpen = () => {
+    const { listOpen, screenWidth } = this.state;
+    if (listOpen && screenWidth < 800) {
+       this.setState({listOpen: false});
+     }
   }
 
    componentDidUpdate({ isScriptLoadSucceed }) {
@@ -67,21 +75,28 @@ class App extends Component {
 
   render() {
         console.log(this.state);
-    const { listOpen, infowindowOpen, infoWindow, myMap, showFiltered, centerMap, mapIsReady, mapError } = this.state;
+    const { listOpen, infowindowOpen,
+            infoWindow, myMap, showFiltered,
+            centerMap, mapIsReady, mapError,
+            screenWidth } = this.state;
 
     return (
       <div id="container" role="main">
         <h1 tabIndex="0">Florence Italy POI</h1>
         <h2 tabIndex="0">Results powered by Foursquare</h2>
-        <h5
-          className="toggle-list"
-          tabIndex="0"
-          onClick={this.toggleList}>
-            {listOpen ? 'Hide List' : 'Show List'}
-        </h5>
+        { screenWidth < 800 ? (
+          <nav>
+            <img className="menu-icon"
+              src={menu} width="30" height="30"
+              tabIndex="0"
+              onClick={this.toggleList}
+            />
+          </nav>
+        ) : " "}
+
         <section id="listSection"
                   tabIndex={ listOpen ? "0" : "-1"}
-                  className={ listOpen ? "list-show" : "list-hide"}>
+                  className={ listOpen ? "list-open" : "list-hide"}>
           { mapIsReady ? (
           <PlacesList
             listOpen = {listOpen}
@@ -92,7 +107,8 @@ class App extends Component {
             showFiltered={showFiltered}
             toggleList={this.toggleList}
             filterByName={this.filterByName}
-            filterCategories={this.filterCategories}/>
+            filterCategories={this.filterCategories}
+            checkListOpen={this.checkListOpen}/>
           ) : (
             <p>Technical difficulties, please try again</p>
           )}

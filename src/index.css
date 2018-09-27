@@ -53,10 +53,10 @@ h2 {
   grid-row-start: 3;
   grid-column-start: 1;
   background-color: var(--list-section);
-  left: 15px;
+  /* left: 15px; */
   border: 2px solid var(--main-font);
   overflow: scroll;
-  transition: 1s;
+  /* transition: 1s; */
   margin-top: 0;
 }
 
@@ -70,22 +70,6 @@ h2 {
   background-image: linear-gradient(to bottom, transparent, #fde7b4);
 }
 
-/* #places-section {
-  grid-row-start: 1;
-  grid-column: 1;
-  margin-top: 10px;
-  background-color: #fff7e6;
-  height: 60vh;
-  z-index: 10;
-  position: absolute;
-  left: 15px;
-  float: left;
-  border: 2px solid #009933;
-  overflow: scroll;
-  transition: 1s;
-  text-align: center;
-} */
-
 .placesList {
   list-style-type: none;
   /* width: 170px; */
@@ -97,14 +81,36 @@ h2 {
   padding: 3px;
 }
 
-.toggle-list {
+.menu-icon {
   grid-row-start: 2;
   grid-column-start: 1;
   justify-self: left;
-  padding-left: 10px;
+  position: absolute;
+  left: 7px;
+  top: 60px;
   color: var(--main-font);
-  margin: 10px 0 5px 0;
 }
+
+/* .toggle-list {
+  grid-row-start: 2;
+  grid-column-start: 1;
+  justify-self: left;
+  padding: 5px 5px 15px 5px;
+  color: var(--list-section);
+  background: var(--main-font);
+  margin: 0 0 15px 10px;
+  border-radius: 8px;
+  box-shadow: 0 5px 0 #314e36;
+  /*gives button 'button' motion*/
+	/* transition: all .1s ease; */
+/* }
+
+/*gives toggle buttom 3d-ish look*/
+/* .toggle-list:active {
+  box-shadow: 0 3px 0 #fff, 0 3px 6px #ccc;
+  /* position: relative; */
+  /* top: 6px;
+}  */
 
 .list-hide {
   display: none;

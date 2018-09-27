@@ -13,7 +13,8 @@ class PlacesList extends Component {
     myMap: PropTypes.object.isRequired,
     centerMap: PropTypes.object.isRequired,
     toggleList: PropTypes.func.isRequired,
-    showFiltered: PropTypes.bool.isRequired
+    showFiltered: PropTypes.bool.isRequired,
+    checkListOpen: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -45,7 +46,7 @@ class PlacesList extends Component {
 
   // create markers
   createMarkers(realVenues) {
-    const {myMap, infoWindow, listOpen, toggleList, infowindowOpen } = this.props;
+    const {myMap, infoWindow, listOpen, infowindowOpen, checkListOpen } = this.props;
     const {venues} = this.state;
     venues.map((venue, marker) => {
       // let position ={venue.location.lat, venue.location.lng};
@@ -81,9 +82,10 @@ class PlacesList extends Component {
           .catch(() => {
             console.log("error creating infowindow");
           });
-          if (listOpen) {
-             toggleList();
-           }
+          // if (listOpen) {
+          //    this.setState({listOpen: false});
+          //  }
+          checkListOpen();
       });
     });
   }
@@ -138,14 +140,14 @@ class PlacesList extends Component {
                 catName == 'Garden'
                 ? 'Other POI'
                 : catName;
-      console.log(catName);
+      // console.log(catName);
 
       const matches = catName.toLowerCase().includes(filterObj.toLowerCase());
       venue.marker.setVisible(matches);
       return matches;
     });
-    console.log(filterObj);
-    console.log(filteredCategories);
+    // console.log(filterObj);
+    // console.log(filteredCategories);
     this.setState(
       { filteredList: filteredCategories }
     );
@@ -159,17 +161,16 @@ class PlacesList extends Component {
   //   console.log(allCatNames);
   // });
 
-   getCatNames = () => {
-     const {venues } = this.state;
-     const venueCatArray = venues.map( venue => venue.categories);
-     console.log(venueCatArray);
-
-     const catNameArray = venueCatArray.map(item => item[0].name);
-     // const catNameArray = venueCatArray.map(item => {
-     //   Object.values(item);
-     // })
-     console.log(catNameArray);
-  }
+  //  getCatNames = () => {
+  //    const {venues } = this.state;
+  //    const venueCatArray = venues.map( venue => venue.categories);
+  //    console.log(venueCatArray);
+  //    const catNameArray = venueCatArray.map(item => item[0].name);
+  //    // const catNameArray = venueCatArray.map(item => {
+  //    //   Object.values(item);
+  //    // })
+  //    console.log(catNameArray);
+  // }
 
   //open infowindow when a venue in list is clicked
   openInfowindow = (venue) => {
@@ -182,7 +183,7 @@ class PlacesList extends Component {
     const { filteredList } = this.state;
     const { listOpen } = this.props;
     console.log(filteredList);
-    this.getCatNames();
+    // this.getCatNames();
 
     return(
       <div>
