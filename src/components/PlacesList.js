@@ -125,15 +125,21 @@ class PlacesList extends Component {
     //filter markers as per category
     const filteredCategories = venues.filter(venue => {
       const venueCat = venue.categories;
-      console.log(venue.categories);
-
+      // console.log(venue.categories);
       let catName = venueCat.map(cat => cat.name)[0];
-
-      // catName =  catName == 'Outdoor Sculpture' ? 'Other POI' : 'Monument/Landmark' ? 'Other POI' : 'Historic Site' ? 'Other POI' : 'City Hall' ? 'Other POI' : 'Bridge' ? 'Other POI' : 'Scenic Lookout' ? 'Other POI' : 'Garden' ? 'Other POI' : catName;
       // catName = catName === 'History Museum' ? 'Museum' :catName ;
       // a = condition1 ? 1 : condition2 ? 2 : condition3 ? 3 : null;
-      // catName = catName == 'History Museum' ? 'Museum' : 'Church' ? 'Church' : 'Plaza' ? 'Plaza' : 'Outdoor Sculputre' ? 'Other POI' : 'Monument/Landmark' ? 'Other POI' : 'Historic Site' ? 'Other POI' : 'City Hall' ? 'Other POI' : 'Bridge' ? 'Other POI' : 'Scenic Lookout' ? 'Other POI' : 'Garden' ? 'Other POI' : catName;
+      catName = catName == 'Outdoor Sculpture' ||
+                catName == 'Monument / Landmark' ||
+                catName == 'Historic Site' ||
+                catName == 'City Hall' ||
+                catName == 'Bridge' ||
+                catName == 'Scenic Lookout' ||
+                catName == 'Garden'
+                ? 'Other POI'
+                : catName;
       console.log(catName);
+
       const matches = catName.toLowerCase().includes(filterObj.toLowerCase());
       venue.marker.setVisible(matches);
       return matches;
@@ -154,12 +160,16 @@ class PlacesList extends Component {
   // });
 
    getCatNames = () => {
-    const {venues, categories, } = this.state;
-    const venueCatArray = venues.map( venue => venue.categories);
-    console.log(venueCatArray);
-    const catNameArray = venueCatArray.map(item => item.value);
-  console.log(catNameArray);
-}
+     const {venues } = this.state;
+     const venueCatArray = venues.map( venue => venue.categories);
+     console.log(venueCatArray);
+
+     const catNameArray = venueCatArray.map(item => item[0].name);
+     // const catNameArray = venueCatArray.map(item => {
+     //   Object.values(item);
+     // })
+     console.log(catNameArray);
+  }
 
   //open infowindow when a venue in list is clicked
   openInfowindow = (venue) => {
