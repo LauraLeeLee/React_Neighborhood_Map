@@ -90,6 +90,8 @@ class PlacesList extends Component {
     });
   }
 
+  const
+
   //filters list from input entry
   filterByName = (event) => {
     const {venues} = this.state;
@@ -131,16 +133,28 @@ class PlacesList extends Component {
       let catName = venueCat.map(cat => cat.name)[0];
       // catName = catName === 'History Museum' ? 'Museum' :catName ;
       // a = condition1 ? 1 : condition2 ? 2 : condition3 ? 3 : null;
-      catName = catName == 'Outdoor Sculpture' ||
-                catName == 'Monument / Landmark' ||
-                catName == 'Historic Site' ||
-                catName == 'City Hall' ||
-                catName == 'Bridge' ||
-                catName == 'Scenic Lookout' ||
-                catName == 'Garden'
-                ? 'Other POI'
-                : catName;
-      // console.log(catName);
+      // catName = catName == 'Outdoor Sculpture' ||
+      //           catName == 'Monument / Landmark' ||
+      //           catName == 'Historic Site' ||
+      //           catName == 'City Hall' ||
+      //           catName == 'Bridge' ||
+      //           catName == 'Scenic Lookout' ||
+      //           catName == 'Garden'
+      //           ? 'Other POI'
+      //           : catName;
+      const otherCats = [ 'Outdoor Sculpture', 'Monument / Landmark', 'Historic Site', 'City Hall', 'Bridge', 'Scenic Lookout', 'Garden'];
+      catName = otherCats.includes(catName) ? 'Other POI' :  catName;
+      console.log(catName);
+
+      // catName = venueCategoryArray.includes(otherCats) ? 'Other POI' :  catName;
+
+      //  if(categories.includes(otherCats)) {
+      //   catName = 'Other POI';
+      // } else {
+      //   catName = catName;
+      // }
+      console.log(catName);
+
 
       const matches = catName.toLowerCase().includes(filterObj.toLowerCase());
       venue.marker.setVisible(matches);
@@ -152,6 +166,8 @@ class PlacesList extends Component {
       { filteredList: filteredCategories }
     );
   };
+
+
 
   // const allCategories =  venues.map(venue => {
   //   const venueCat = venue.categories;
@@ -187,10 +203,10 @@ class PlacesList extends Component {
 
     return(
       <div>
-        <ul className="categories">
+        <ul className="categories" role="tablist">
           {categories.map(name => (
             <li key={name}
-                role="button"
+                role="tab"
                 tabIndex={listOpen ? "0" : "-1"}
                 onClick={() => this.filterByCategory(name)}
                 onKeyPress={() => this.filterByCategory(name)}>

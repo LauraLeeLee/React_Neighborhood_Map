@@ -22,7 +22,7 @@ export const createInfowindow = (marker) => {
 											<div class="places-details">
 												<h3 class="place-name">${marker.name}</h3>
 												<p class="place-address">${marker.location}</p>
-												<p class="place-phone">${marker.phone}</p>
+												<a class="place-phone" href="tel:${marker.phone}">Call ${marker.phone}</a>
 												<p class="place-description">${marker.description}</p>
 												<a id="website" href=${marker.url}  target="_blank">${marker.url}</a>
 									 		</div>
