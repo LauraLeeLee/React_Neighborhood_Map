@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getFSvenues, getFSdetails, categoryName, poiNames } from '../data/fsData.js';
+import { getFSvenues, getFSdetails } from '../data/fsData.js';
 import {gatherContent, createInfowindow} from '../data/placesDetails.js';
 import categories from '../data/categories.js'
 
@@ -46,7 +46,7 @@ class PlacesList extends Component {
 
   // create markers
   createMarkers(realVenues) {
-    const {myMap, infoWindow, listOpen, infowindowOpen, checkListOpen } = this.props;
+    const {myMap, infoWindow, checkListOpen } = this.props;
     const {venues} = this.state;
     venues.map((venue, marker) => {
       // let position ={venue.location.lat, venue.location.lng};
@@ -120,7 +120,7 @@ class PlacesList extends Component {
 
   //filter list by category selected
   filterByCategory = (filterObj) => {
-    const {venues, categories, } = this.state;
+    const {venues, categories } = this.state;
     const {infoWindow} = this.props;
 
     //close any open infowindows
@@ -190,7 +190,6 @@ class PlacesList extends Component {
 
   //open infowindow when a venue in list is clicked
   openInfowindow = (venue) => {
-    const {toggleList, listOpen} = this.props;
     window.google.maps.event.trigger(venue.marker, "click");
     console.log("openInfowindow triggered");
   }
@@ -225,7 +224,7 @@ class PlacesList extends Component {
           <ul className="placesList" role="listbox">
                 {filteredList.map(venue => (
                   <li key={venue.id}
-                      role="option"
+                      role="button"
                       tabIndex={listOpen ? "0" : "-1"}
                       onClick={() => this.openInfowindow(venue)}
                       onKeyPress={() => this.openInfowindow(venue)}>

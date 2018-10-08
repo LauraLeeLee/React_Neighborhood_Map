@@ -88,6 +88,7 @@ class App extends Component {
           <nav>
             <img className="menu-icon"
               src={menu} width="30" height="30"
+              alt="menu icon"
               tabIndex="0"
               onClick={this.toggleList}
             />
