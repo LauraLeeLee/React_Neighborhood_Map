@@ -27,20 +27,20 @@ Uses Node.js >= 6.x and create-react-app project starter.
 
 After installing Node.js on your system:
 
-    * In terminal, navigate to the directory that will hold the app.
-    * Clone the repo git clone (https://github.com/manishbisht/Neighborhood-Map-React.git)
-    * Install all dependencies needed by running `npm install` in terminal.
-    * Start app with `npm start` in terminal.
+  * In terminal, navigate to the directory that will hold the app.
+  * Clone the repo git clone (https://github.com/manishbisht/Neighborhood-Map-React.git)
+  * Install all dependencies needed by running `npm install` in terminal.
+  * Start app with `npm start` in terminal.
 
-    * A new browser window will open with the app. If it doesn't use http://localhost:3000/ in your browser
+  * A new browser window will open with the app. If it doesn't use http://localhost:3000/ in your browser
 
 ______________________________________________________
 ## Production Mode
 
-    * To build the production ready code run `npm run build`
-    * View online demo here
+  * To build the production ready code run `npm run build`
+  * View online demo here
 
-    **PLEASE NOTE: The service worker for this project will only function when in the production mode.**
+  **PLEASE NOTE: The service worker for this project will only function when in the production mode.**
 
 ________________________________________________________________________________________________________________
 
