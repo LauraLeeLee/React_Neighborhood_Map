@@ -26,7 +26,8 @@ export const createInfowindow = (marker) => {
 												<p class="place-description">${marker.description}</p>
 												<a id="website" href=${marker.url}  target="_blank">${marker.url}</a>
 									 		</div>
-										</div>`
+										</div>`,
+	marker.error = `<dive class="infowindowError">FourSquare error, please try again</div>`
 
 }
 

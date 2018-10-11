@@ -131,6 +131,11 @@ h2 {
   color: #d9d9d9;
 }
 
+.filterError {
+  margin: 10% 0 0 10%;
+  width: 80%;
+}
+
 /* infowindow styling */
 .infowindow {
   /* width: 300px;

@@ -9,7 +9,6 @@ class PlacesList extends Component {
   static propTypes = {
     listOpen: PropTypes.bool.isRequired,
     infoWindow: PropTypes.object.isRequired,
-    // infowindowOpen: PropTypes.bool.isRequired,
     myMap: PropTypes.object.isRequired,
     centerMap: PropTypes.object.isRequired,
     toggleList: PropTypes.func.isRequired,
@@ -23,7 +22,8 @@ class PlacesList extends Component {
       venues: [],
       filteredList: [],
       query: "",
-      categories: []
+      categories: [],
+      fsApiReturned: true
     };
     // this.handleToggle = this.handleToggle.bind(this);
     // this.handleCategories = this.handleCategories.bind(this);
@@ -40,14 +40,13 @@ class PlacesList extends Component {
       if(realVenues) {
         this.createMarkers(realVenues);
       }
-    });
-    // getAllCats(getFSvenues);
+    }).catch(error => this.setState({fsApiReturned: false}));
   }
 
   // create markers
   createMarkers(realVenues) {
     const {myMap, infoWindow, checkListOpen } = this.props;
-    const {venues} = this.state;
+    const {venues, fsApiReturned} = this.state;
     venues.map((venue, marker) => {
       // let position ={venue.location.lat, venue.location.lng};
       venue.marker = new window.google.maps.Marker({
@@ -79,18 +78,14 @@ class PlacesList extends Component {
             infoWindow.setContent(marker.content);
             infoWindow.open(myMap, marker);
           })
-          .catch(() => {
-            console.log("error creating infowindow");
+          .catch(error => {
+            this.setState({fsApiReturned: false});
+            infoWindow.setContent(marker.error);
           });
-          // if (listOpen) {
-          //    this.setState({listOpen: false});
-          //  }
           checkListOpen();
       });
     });
   }
-
-  const
 
   //filters list from input entry
   filterByName = (event) => {
@@ -146,16 +141,6 @@ class PlacesList extends Component {
       catName = otherCats.includes(catName) ? 'Other POI' :  catName;
       console.log(catName);
 
-      // catName = venueCategoryArray.includes(otherCats) ? 'Other POI' :  catName;
-
-      //  if(categories.includes(otherCats)) {
-      //   catName = 'Other POI';
-      // } else {
-      //   catName = catName;
-      // }
-      console.log(catName);
-
-
       const matches = catName.toLowerCase().includes(filterObj.toLowerCase());
       venue.marker.setVisible(matches);
       return matches;
@@ -195,46 +180,56 @@ class PlacesList extends Component {
   }
 
   render() {
-    const { filteredList } = this.state;
-    const { listOpen } = this.props;
-    console.log(filteredList);
-    // this.getCatNames();
+  const { filteredList, fsApiReturned } = this.state;
+  const { listOpen } = this.props;
+  console.log(filteredList);
+  // this.getCatNames();
 
-    return(
-      <div>
-        <ul className="categories" role="tablist">
+  if(!fsApiReturned) {
+    return (<div>Foursquare not responding, please try again</div>)
+    } else {
+      return(
+        <div>
+          <ul className="categories" role="tablist">
           {categories.map(name => (
             <li key={name}
-                role="tab"
-                tabIndex={listOpen ? "0" : "-1"}
-                onClick={() => this.filterByCategory(name)}
-                onKeyPress={() => this.filterByCategory(name)}>
-              {name}
+            role="tab"
+            tabIndex={listOpen ? "0" : "-1"}
+            onClick={() => this.filterByCategory(name)}
+            onKeyPress={() => this.filterByCategory(name)}>
+            {name}
             </li>
           ))}
-        </ul>
-        <input id="filter-places"
-              type="text"
-              role="search"
-              tabIndex={listOpen ? "0" : "-1"}
-              data-bind="textInput: filter"
-              placeholder="Filter locations by name..."
-              onChange={this.filterByName}/>
-
-          <ul className="placesList" role="listbox">
-                {filteredList.map(venue => (
-                  <li key={venue.id}
-                      role="button"
-                      tabIndex={listOpen ? "0" : "-1"}
-                      onClick={() => this.openInfowindow(venue)}
-                      onKeyPress={() => this.openInfowindow(venue)}>
-                    {venue.name}
-                    </li>
-                ))}
           </ul>
-          <div  className="fade-text"></div>
-      </div>
-    );
+          <input id="filter-places"
+          type="text"
+          role="search"
+          tabIndex={listOpen ? "0" : "-1"}
+          data-bind="textInput: filter"
+          placeholder="Filter locations by name..."
+          onChange={this.filterByName}/>
+
+          {filteredList.length < 1 ? (
+          <div className="filterError">Sorry, no venues match your search, please try again</div>
+          ) : (
+          <div>
+            <ul className="placesList" role="listbox">
+            {filteredList.map(venue => (
+              <li key={venue.id}
+              role="button"
+              tabIndex={listOpen ? "0" : "-1"}
+              onClick={() => this.openInfowindow(venue)}
+              onKeyPress={() => this.openInfowindow(venue)}>
+              {venue.name}
+              </li>
+            ))}
+            </ul>
+            <div className="fade-text"></div>
+          </div>
+        )}
+        </div>
+      );
+    }
   }
 }
 
