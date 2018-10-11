@@ -46,6 +46,13 @@ h2 {
   border-top: 2px solid var(--main-font);
 }
 
+#maperror {
+  font: italic bold 20px Georgia, serif;
+  margin-left: 300px;
+  margin-top: 180px;
+  width: 60%;
+}
+
 #listSection {
   width: 30vw;
   height: 100vh;
@@ -90,27 +97,6 @@ h2 {
   top: 60px;
   color: var(--main-font);
 }
-
-/* .toggle-list {
-  grid-row-start: 2;
-  grid-column-start: 1;
-  justify-self: left;
-  padding: 5px 5px 15px 5px;
-  color: var(--list-section);
-  background: var(--main-font);
-  margin: 0 0 15px 10px;
-  border-radius: 8px;
-  box-shadow: 0 5px 0 #314e36;
-  /*gives button 'button' motion*/
-	/* transition: all .1s ease; */
-/* }
-
-/*gives toggle buttom 3d-ish look*/
-/* .toggle-list:active {
-  box-shadow: 0 3px 0 #fff, 0 3px 6px #ccc;
-  /* position: relative; */
-  /* top: 6px;
-}  */
 
 .list-hide {
   display: none;
@@ -176,6 +162,11 @@ h2 {
   @media only screen and (max-width: 700px) {
   h1 {
     font-size: 2em;
+  }
+
+  #maperror {
+    margin-left: 220px;
+    width: 40%;
   }
 
   #listSection {

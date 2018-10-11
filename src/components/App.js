@@ -67,7 +67,7 @@ class App extends Component {
           mapIsReady: true,
           infoWindow: infowindow,
         });
-    } else if (!this.state.mapIsReady) {
+    } else if (!this.state.mapIsReady && !this.state.mapError) {
       this.setState({ mapError: true });
     }
   }
@@ -118,7 +118,8 @@ class App extends Component {
         <section id="map">
           {mapError ? (
             <div id="maperror">
-              Google Maps not loading, please try your request again
+              Google Maps not loading,
+              please try your request again
             </div>
           ) : (
             <div className="mapload">
