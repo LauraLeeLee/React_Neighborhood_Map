@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getFSvenues, getFSdetails } from '../data/fsData.js';
-import {gatherContent, createInfowindow} from '../data/placesDetails.js';
+import {gatherContent, createInfowindow, createInfowindowError} from '../data/placesDetails.js';
 import categories from '../data/categories.js'
 
 class PlacesList extends Component {
@@ -78,9 +78,12 @@ class PlacesList extends Component {
             infoWindow.setContent(marker.content);
             infoWindow.open(myMap, marker);
           })
-          .catch(error => {
-            this.setState({fsApiReturned: false});
-            infoWindow.setContent(marker.error);
+          .catch(() => {createInfowindowError(marker)
+              console.log("Error with FS details");
+          })
+            .finally(() => {
+
+              infoWindow.setContent(marker.content);
           });
           checkListOpen();
       });
@@ -124,7 +127,6 @@ class PlacesList extends Component {
     //filter markers as per category
     const filteredCategories = venues.filter(venue => {
       const venueCat = venue.categories;
-      // console.log(venue.categories);
       let catName = venueCat.map(cat => cat.name)[0];
       // catName = catName === 'History Museum' ? 'Museum' :catName ;
       // a = condition1 ? 1 : condition2 ? 2 : condition3 ? 3 : null;
@@ -176,7 +178,6 @@ class PlacesList extends Component {
   //open infowindow when a venue in list is clicked
   openInfowindow = (venue) => {
     window.google.maps.event.trigger(venue.marker, "click");
-    console.log("openInfowindow triggered");
   }
 
   render() {

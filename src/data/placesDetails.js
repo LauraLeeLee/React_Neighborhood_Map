@@ -26,9 +26,14 @@ export const createInfowindow = (marker) => {
 												<p class="place-description">${marker.description}</p>
 												<a id="website" href=${marker.url}  target="_blank">${marker.url}</a>
 									 		</div>
-										</div>`,
-	marker.error = `<dive class="infowindowError">FourSquare error, please try again</div>`
+										</div>`
+}
 
+export const createInfowindowError = (marker) => {
+	marker.content = `<div class="fsDetails-error">
+										<h2>Foursquare Venue Details search failed</h2>
+										<p>Try again later...</p>
+										</div>`
 }
 
 

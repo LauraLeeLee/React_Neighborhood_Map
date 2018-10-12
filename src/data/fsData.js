@@ -48,7 +48,6 @@ export const getFSvenues = (centerMap) => {
       }
     })
     .then(data => {
-
       const venues = data.response.venues;
       const realVenues = venues.filter(venue =>
           venue.location.address && venue.location.city
@@ -60,12 +59,12 @@ export const getFSvenues = (centerMap) => {
 
 export const getFSdetails = (fsid) => {
   const fourSqId = fsid;
-  const detailsUrl = `${fourSqUrl}${fourSqId}?client_id=${clientId}&client_secret=${clientSecret}&v=${versDate}`
+  const detailsUrl = `zz${fourSqUrl}${fourSqId}?client_id=${clientId}&client_secret=${clientSecret}&v=${versDate}`
 
   return fetch(detailsUrl)
     .then(response => {
       if(!response.ok ){
-        console.log("error when retrieving venues");
+        console.log("error when retrieving venue details");
       }else {
           return response.json();
       }
