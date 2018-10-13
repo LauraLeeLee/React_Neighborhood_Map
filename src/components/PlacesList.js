@@ -71,6 +71,7 @@ class PlacesList extends Component {
         //gets fs details for marker venue on marker click
         getFSdetails(marker.id)
           .then(data => {
+
             gatherContent(marker, data);
             createInfowindow(marker);
           })
@@ -80,10 +81,8 @@ class PlacesList extends Component {
           })
           .catch(() => {createInfowindowError(marker)
               console.log("Error with FS details");
-          })
-            .finally(() => {
-
               infoWindow.setContent(marker.content);
+              infoWindow.open(myMap, marker);
           });
           checkListOpen();
       });

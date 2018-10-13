@@ -32,7 +32,7 @@ export const createInfowindow = (marker) => {
 export const createInfowindowError = (marker) => {
 	marker.content = `<div class="fsDetails-error">
 										<h2>Foursquare Venue Details search failed</h2>
-										<p>Try again later...</p>
+										<p>Please try again later</p>
 										</div>`
 }
 

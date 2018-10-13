@@ -2,6 +2,7 @@
   --main-color: #FBCD61;
   --main-font: #406647;
   --list-section: #fde7b4;
+  --error-text: #fff;
 }
 body {
   margin: 0;
@@ -148,7 +149,19 @@ h2 {
 }
 
 .fsDetails-error {
+  background: #ff0000;
+  height: 100%;
+}
 
+.fsDetails-error h2{
+  font-size: 1.25em;
+    color: var(--error-text);
+    padding: 15px;
+}
+
+.fsDetails-error p{
+  font-size: 1.25em;
+  color: var(--error-text);
 }
 
 .places-details {

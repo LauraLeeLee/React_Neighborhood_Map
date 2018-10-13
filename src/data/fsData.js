@@ -59,7 +59,7 @@ export const getFSvenues = (centerMap) => {
 
 export const getFSdetails = (fsid) => {
   const fourSqId = fsid;
-  const detailsUrl = `zz${fourSqUrl}${fourSqId}?client_id=${clientId}&client_secret=${clientSecret}&v=${versDate}`
+  const detailsUrl = `${fourSqUrl}${fourSqId}?client_id=${clientId}&client_secret=${clientSecret}&v=${versDate}`
 
   return fetch(detailsUrl)
     .then(response => {
