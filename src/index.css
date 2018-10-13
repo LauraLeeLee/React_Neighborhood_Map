@@ -38,8 +38,6 @@ h2 {
 
 #map {
   height: 100vh;
-  /* grid-row-start: 3;
-  grid-column-start: 2;  */
   width: 100vw;
   grid-row-start: 3;
   grid-column-start: 1;
@@ -61,7 +59,6 @@ h2 {
   grid-row-start: 3;
   grid-column-start: 1;
   background-color: var(--list-section);
-  /* left: 15px; */
   border: 2px solid var(--main-font);
   overflow: scroll;
   /* transition: 1s; */
@@ -80,7 +77,6 @@ h2 {
 
 .placesList {
   list-style-type: none;
-  /* width: 170px; */
   color: var(--main-font);
   text-align: left;
 }
@@ -144,7 +140,6 @@ h2 {
   overflow: auto;
   text-align: center;
   margin: 0 auto 10px;
-  /* background-color: #c6ecd9; */
   border-radius: 10px;
 }
 
