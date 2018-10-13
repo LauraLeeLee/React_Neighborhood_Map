@@ -108,7 +108,7 @@ class App extends Component {
           )}
         </section>
 
-        <section id="map">
+        <section id="map" role="application">
           {mapError ? (
             <div id="maperror">
               Google Maps not loading,

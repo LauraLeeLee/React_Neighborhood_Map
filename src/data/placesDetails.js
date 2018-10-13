@@ -18,7 +18,7 @@ export const gatherContent = (marker, data) => {
 
 export const createInfowindow = (marker) => {
 	marker.content = `<div class="infowindow">
-											<img class= "place-img" src=${marker.photo}>
+											<img class= "place-img" src=${marker.photo} alt="image of ${marker.name}">
 											<div class="places-details">
 												<h3 class="place-name">${marker.name}</h3>
 												<p class="place-address">${marker.location}</p>

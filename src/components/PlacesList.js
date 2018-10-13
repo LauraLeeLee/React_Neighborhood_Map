@@ -123,7 +123,8 @@ class PlacesList extends Component {
     const filteredCategories = venues.filter(venue => {
       const venueCat = venue.categories;
       let catName = venueCat.map(cat => cat.name)[0];
-      // keeping code for otherCats to see syntax
+
+    // keeping code for catName to see syntax
       // catName = catName === 'History Museum' ? 'Museum' :catName ;
       // a = condition1 ? 1 : condition2 ? 2 : condition3 ? 3 : null;
       // catName = catName == 'Outdoor Sculpture' ||
