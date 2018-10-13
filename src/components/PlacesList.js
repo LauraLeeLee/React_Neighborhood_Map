@@ -25,9 +25,6 @@ class PlacesList extends Component {
       categories: [],
       fsApiReturned: true
     };
-    // this.handleToggle = this.handleToggle.bind(this);
-    // this.handleCategories = this.handleCategories.bind(this);
-    // this.openInfowindow =this.openInfowindow .bind(this);
   }
 
   componentDidMount() {
@@ -46,7 +43,7 @@ class PlacesList extends Component {
   // create markers
   createMarkers(realVenues) {
     const {myMap, infoWindow, checkListOpen } = this.props;
-    const {venues, fsApiReturned} = this.state;
+    const {venues} = this.state;
     venues.map((venue, marker) => {
       // let position ={venue.location.lat, venue.location.lng};
       venue.marker = new window.google.maps.Marker({
@@ -109,7 +106,6 @@ class PlacesList extends Component {
       venue.marker.setVisible(matches);
       return matches;
     });
-    console.log(filteredMarkers);
     this.setState(
       { filteredList: filteredMarkers }
     );
@@ -127,6 +123,7 @@ class PlacesList extends Component {
     const filteredCategories = venues.filter(venue => {
       const venueCat = venue.categories;
       let catName = venueCat.map(cat => cat.name)[0];
+      // keeping code for otherCats to see syntax
       // catName = catName === 'History Museum' ? 'Museum' :catName ;
       // a = condition1 ? 1 : condition2 ? 2 : condition3 ? 3 : null;
       // catName = catName == 'Outdoor Sculpture' ||
@@ -140,39 +137,15 @@ class PlacesList extends Component {
       //           : catName;
       const otherCats = [ 'Outdoor Sculpture', 'Monument / Landmark', 'Historic Site', 'City Hall', 'Bridge', 'Scenic Lookout', 'Garden'];
       catName = otherCats.includes(catName) ? 'Other POI' :  catName;
-      console.log(catName);
 
       const matches = catName.toLowerCase().includes(filterObj.toLowerCase());
       venue.marker.setVisible(matches);
       return matches;
     });
-    // console.log(filterObj);
-    // console.log(filteredCategories);
     this.setState(
       { filteredList: filteredCategories }
     );
   };
-
-
-
-  // const allCategories =  venues.map(venue => {
-  //   const venueCat = venue.categories;
-  //   console.log(venue.categories);
-  //
-  //   let allCatNames = venueCat.map(cat => cat.name)[0];
-  //   console.log(allCatNames);
-  // });
-
-  //  getCatNames = () => {
-  //    const {venues } = this.state;
-  //    const venueCatArray = venues.map( venue => venue.categories);
-  //    console.log(venueCatArray);
-  //    const catNameArray = venueCatArray.map(item => item[0].name);
-  //    // const catNameArray = venueCatArray.map(item => {
-  //    //   Object.values(item);
-  //    // })
-  //    console.log(catNameArray);
-  // }
 
   //open infowindow when a venue in list is clicked
   openInfowindow = (venue) => {
@@ -182,8 +155,6 @@ class PlacesList extends Component {
   render() {
   const { filteredList, fsApiReturned } = this.state;
   const { listOpen } = this.props;
-  console.log(filteredList);
-  // this.getCatNames();
 
   if(!fsApiReturned) {
     return (<div>Foursquare not responding, please try again</div>)

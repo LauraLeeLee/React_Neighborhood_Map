@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { mapStyle } from '../data/mapStyle.js';
-// import  locations  from '../data/locations.js';
-// import { getFSvenues, realVenues} from '../data/fsData.js';
 import scriptLoader from 'react-async-script-loader';
 import PlacesList from './PlacesList.js';
 import menu from '../images/menu.png';
-// import InfoWindow from './InfoWindow.js';
 
 class App extends Component {
   constructor(props) {
@@ -25,12 +22,10 @@ class App extends Component {
       screenWidth: window.innerWidth
     }
     this.toggleList = this.toggleList.bind(this);
-    // this.filterByName = this.filterByName.bind(this);
-    // this.filterCategories = this.filterCategories.bind(this);
   }
 
   toggleList = () => {
-    const { listOpen, infoWindow, infowindowOpen, screenWidth } = this.state;
+    const { listOpen, infoWindow, screenWidth } = this.state;
     if(screenWidth < 800) {
       if (!listOpen) {
           infoWindow.close();
@@ -47,7 +42,6 @@ class App extends Component {
   }
 
    componentDidUpdate({ isScriptLoadSucceed }) {
-    // const { isScriptLoaded, isScriptLoadSucceed } = this.props
     const { centerMap, mapError } = this.state;
 
     if (isScriptLoadSucceed && !this.state.mapIsReady) {
@@ -74,7 +68,6 @@ class App extends Component {
 
 
   render() {
-        console.log(this.state);
     const { listOpen, infowindowOpen,
             infoWindow, myMap, showFiltered,
             centerMap, mapIsReady, mapError,
