@@ -36,7 +36,7 @@ const versDate = 20180916;
 
 export const getFSvenues = (centerMap) => {
   const urlRequest = `${fourSqUrl}search?ll=${centerMap.lat},
-    ${centerMap.lng}&client_id=${clientId}&client_secret=${clientSecret}&v=${versDate}&categoryId=${poiIds}&radius=1609&limit=50`;
+    ${centerMap.lng}&client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&v=${versDate}&categoryId=${poiIds}&radius=1609&limit=50`;
   return fetch(urlRequest)
     .then(response => {
       if(!response.ok ){
@@ -57,7 +57,7 @@ export const getFSvenues = (centerMap) => {
 
 export const getFSdetails = (fsid) => {
   const fourSqId = fsid;
-  const detailsUrl = `${fourSqUrl}${fourSqId}?client_id=${clientId}&client_secret=${clientSecret}&v=${versDate}`
+  const detailsUrl = `${fourSqUrl}${fourSqId}?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&v=${versDate}`
 
   return fetch(detailsUrl)
     .then(response => {
